@@ -23,3 +23,8 @@ void MainWindow::setupMenuActions()
     ui->actionClose->setShortcuts(QKeySequence::Quit);
     ui->actionOpenWorkspace->setShortcuts(QKeySequence::Open);
 }
+
+void BBTCalculator::Gui::MainWindow::retranlateUi()
+{
+    ui->retranslateUi(this);
+}

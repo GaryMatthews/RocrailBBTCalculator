@@ -1,9 +1,11 @@
 
 #pragma once
 
-#include "gui/mainwindow.hpp"
-
 #include <memory>
+
+#include <QtCore/QTranslator>
+
+#include "gui/mainwindow.hpp"
 
 namespace BBTCalculator::Core
 {
@@ -13,6 +15,11 @@ namespace BBTCalculator::Core
         void initializeApplication();
 
     private:
+        void setupTranslator();
+
         BBTCalculator::Gui::MainWindow m_mainWindow;
+
+        QTranslator translator;
+
     };
 }

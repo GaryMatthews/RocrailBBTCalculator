@@ -19,6 +19,8 @@ namespace BBTCalculator::Gui
 
         ~MainWindow() override;
 
+        void retranlateUi();
+
     private:
         void setupMenuActions();
 

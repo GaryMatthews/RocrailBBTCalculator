@@ -22,7 +22,7 @@
       </property>
       <widget class="QGroupBox" name="locBox">
        <property name="title">
-        <string>Lokomotiven</string>
+        <string>Locomotive</string>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
@@ -54,7 +54,7 @@
         <item row="1" column="1">
          <widget class="QPushButton" name="calculateBBT">
           <property name="text">
-           <string>Berechnen</string>
+           <string>Calculate</string>
           </property>
          </widget>
         </item>
@@ -88,7 +88,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>&amp;Datei</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionOpenWorkspace"/>
     <addaction name="separator"/>
@@ -103,24 +103,27 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>&amp;Beenden</string>
+    <string>&amp;Quit</string>
+   </property>
+   <property name="iconText">
+    <string>Quit</string>
    </property>
    <property name="toolTip">
-    <string>Beenden</string>
+    <string>Quit</string>
    </property>
    <property name="statusTip">
-    <string>Beendet die Anwendung</string>
+    <string>Exit the application</string>
    </property>
   </action>
   <action name="actionOpenWorkspace">
    <property name="text">
-    <string>&amp;Arbeitsbereich öffnen</string>
+    <string>&amp;Open workspace</string>
    </property>
    <property name="iconText">
-    <string>Arbeitsbereich öffnen</string>
+    <string>Open workspace</string>
    </property>
    <property name="statusTip">
-    <string>Öffnet einen existierenden Rocrail Arbeitsbereich</string>
+    <string>Opens an existing Rocrail workspace</string>
    </property>
    <property name="shortcut">
     <string/>

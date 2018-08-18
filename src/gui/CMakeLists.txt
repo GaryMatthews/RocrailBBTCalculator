@@ -1,6 +1,13 @@
 SET(CMAKE_AUTOUIC ON)
 SET(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/forms)
 
+FIND_PACKAGE(Qt5LinguistTools REQUIRED)
+
+QT5_ADD_TRANSLATION(QM
+  translations/rocrailBBT_de.ts
+  translations/rocrailBBT_en.ts
+)
+
 ADD_LIBRARY(bbtCalculatorGui STATIC)
 
 TARGET_SOURCES(bbtCalculatorGui
@@ -8,6 +15,8 @@ TARGET_SOURCES(bbtCalculatorGui
     mainwindow.cpp
 
     ${CMAKE_SOURCE_DIR}/src/include/gui/mainwindow.hpp
+
+    ${QM}
 )
 
 TARGET_INCLUDE_DIRECTORIES(bbtCalculatorGui
