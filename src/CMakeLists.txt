@@ -1,0 +1,16 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
+PROJECT(rocrailBBTCalculator)
+
+FIND_PACKAGE(Qt5 COMPONENTS Widgets REQUIRED)
+
+ADD_EXECUTABLE(rocrailBBTCalculator)
+
+TARGET_SOURCES(rocrailBBTCalculator
+  PRIVATE
+    main.cpp
+)
+
+TARGET_LINK_LIBRARIES(rocrailBBTCalculator
+  PRIVATE
+    Qt5::Widgets
+)
