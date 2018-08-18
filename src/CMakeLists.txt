@@ -3,6 +3,9 @@ PROJECT(rocrailBBTCalculator)
 
 FIND_PACKAGE(Qt5 COMPONENTS Widgets REQUIRED)
 
+ADD_SUBDIRECTORY(core)
+ADD_SUBDIRECTORY(gui)
+
 ADD_EXECUTABLE(rocrailBBTCalculator)
 
 TARGET_SOURCES(rocrailBBTCalculator
@@ -13,4 +16,6 @@ TARGET_SOURCES(rocrailBBTCalculator
 TARGET_LINK_LIBRARIES(rocrailBBTCalculator
   PRIVATE
     Qt5::Widgets
+
+    bbtCalculatorCore
 )
