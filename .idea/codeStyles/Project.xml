@@ -7,6 +7,10 @@
       <option name="NAMESPACE_BRACE_PLACEMENT" value="2" />
       <option name="FUNCTION_BRACE_PLACEMENT" value="2" />
       <option name="BLOCK_BRACE_PLACEMENT" value="2" />
+      <option name="SPACE_BEFORE_POINTER_IN_DECLARATION" value="false" />
+      <option name="SPACE_AFTER_POINTER_IN_DECLARATION" value="true" />
+      <option name="SPACE_BEFORE_REFERENCE_IN_DECLARATION" value="false" />
+      <option name="SPACE_AFTER_REFERENCE_IN_DECLARATION" value="true" />
     </Objective-C>
     <Objective-C-extensions>
       <file>
@@ -29,7 +33,7 @@
         <option name="com.jetbrains.cidr.lang.util.OCDeclarationKind" value="DeallocMethod" />
       </class>
       <extensions>
-        <pair source="cpp" header="h" fileNamingConvention="NONE" />
+        <pair source="cpp" header="hpp" fileNamingConvention="LOWERCASE" />
         <pair source="c" header="h" fileNamingConvention="NONE" />
       </extensions>
     </Objective-C-extensions>
@@ -43,6 +47,9 @@
     </codeStyleSettings>
     <codeStyleSettings language="ObjectiveC">
       <option name="CLASS_BRACE_STYLE" value="2" />
+      <indentOptions>
+        <option name="CONTINUATION_INDENT_SIZE" value="4" />
+      </indentOptions>
     </codeStyleSettings>
   </code_scheme>
 </component>
