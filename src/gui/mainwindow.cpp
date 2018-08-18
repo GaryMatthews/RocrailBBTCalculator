@@ -6,12 +6,20 @@ using BBTCalculator::Gui::MainWindow;
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
-    m_ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow)
 {
-    m_ui->setupUi(this);
+    ui->setupUi(this);
+
+    setupMenuActions();
 }
 
 MainWindow::~MainWindow()
 {
-    delete m_ui;
+    delete ui;
+}
+
+void MainWindow::setupMenuActions()
+{
+    ui->actionClose->setShortcuts(QKeySequence::Quit);
+    ui->actionOpenWorkspace->setShortcuts(QKeySequence::Open);
 }

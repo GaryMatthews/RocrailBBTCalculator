@@ -20,6 +20,8 @@ namespace BBTCalculator::Gui
         ~MainWindow() override;
 
     private:
-        Ui::MainWindow* m_ui;
+        void setupMenuActions();
+
+        Ui::MainWindow* ui;
     };
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>938</width>
-    <height>696</height>
+    <width>883</width>
+    <height>776</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,6 +51,13 @@
         <item row="0" column="0" colspan="2">
          <widget class="QTableView" name="bbtTable"/>
         </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="calculateBBT">
+          <property name="text">
+           <string>Berechnen</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0">
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -64,13 +71,6 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="calculateBBT">
-          <property name="text">
-           <string>Berechnen</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
      </widget>
@@ -82,13 +82,68 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>938</width>
+     <width>883</width>
      <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;Datei</string>
+    </property>
+    <addaction name="actionOpenWorkspace"/>
+    <addaction name="separator"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionClose">
+   <property name="icon">
+    <iconset theme="application-exit">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Beenden</string>
+   </property>
+   <property name="toolTip">
+    <string>Beenden</string>
+   </property>
+   <property name="statusTip">
+    <string>Beendet die Anwendung</string>
+   </property>
+  </action>
+  <action name="actionOpenWorkspace">
+   <property name="text">
+    <string>&amp;Arbeitsbereich öffnen</string>
+   </property>
+   <property name="iconText">
+    <string>Arbeitsbereich öffnen</string>
+   </property>
+   <property name="statusTip">
+    <string>Öffnet einen existierenden Rocrail Arbeitsbereich</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionClose</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>468</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
