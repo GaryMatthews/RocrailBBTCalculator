@@ -16,6 +16,6 @@ void Core::setupTranslator()
     if (translator.load(QLocale(), QLatin1String("rocrailBBT"), QLatin1String("_"), QLatin1String("./gui/")))
     {
         QApplication::installTranslator(&translator);
-        m_mainWindow.retranlateUi();
+        m_mainWindow.retranslateUi();
     }
 }
