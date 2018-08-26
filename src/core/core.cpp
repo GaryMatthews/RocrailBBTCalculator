@@ -1,14 +1,24 @@
 
-#include <QtWidgets/QtWidgets>
-
 #include "core.hpp"
 
-using BBTCalculator::Core::Core;
+#include <QtWidgets/QtWidgets>
 
-void Core::initializeApplication()
+#include "gui/mainwindow.hpp"
+#include "gui/mainwindowcontroller.hpp"
+
+using BBTCalculator::Core::Core;
+using BBTCalculator::Gui::MainWindow;
+using BBTCalculator::Gui::MainWindowController;
+
+Core::Core::Core() :
+    mainWindow{new MainWindow()}
+{}
+
+void Core::initializeApplication(MainWindowController& contr)
 {
+    mainWindow->setController(&contr);
     setupTranslator();
-    m_mainWindow.show();
+    mainWindow->show();
 }
 
 void Core::setupTranslator()
@@ -16,6 +26,24 @@ void Core::setupTranslator()
     if (translator.load(QLocale(), QLatin1String("rocrailBBT"), QLatin1String("_"), QLatin1String("./gui/")))
     {
         QApplication::installTranslator(&translator);
-        m_mainWindow.retranslateUi();
+        mainWindow->retranslateUi();
+    }
+}
+
+void BBTCalculator::Core::Core::letUserSelectWorkspace()
+{
+    QString userSelectedDirectory = mainWindow->letUserSelectWorkspaceDirectory();
+
+    if (not userSelectedDirectory.isEmpty())
+    {
+        const QDir dir{userSelectedDirectory};
+        if (dir.exists())
+        {
+            workspace.setRootPath(dir);
+            mainWindow->showRootPath(dir.absolutePath());
+        }
+        else {
+            mainWindow->notifyUserSelectedDirectoryDoesNotExist();
+        }
     }
 }

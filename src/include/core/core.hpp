@@ -5,21 +5,33 @@
 
 #include <QtCore/QTranslator>
 
-#include "gui/mainwindow.hpp"
+#include "workspace.hpp"
+
+namespace BBTCalculator::Gui
+{
+    class MainWindowController;
+    class MainWindow;
+}
 
 namespace BBTCalculator::Core
 {
     class Core
     {
     public:
-        void initializeApplication();
+        Core();
+
+        void initializeApplication(BBTCalculator::Gui::MainWindowController& contr);
+
+        void letUserSelectWorkspace();
 
     private:
         void setupTranslator();
 
-        BBTCalculator::Gui::MainWindow m_mainWindow;
+        std::shared_ptr<BBTCalculator::Gui::MainWindow> mainWindow;
 
         QTranslator translator;
+
+        Workspace workspace;
 
     };
 }

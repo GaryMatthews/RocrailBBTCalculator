@@ -4,6 +4,7 @@ ADD_LIBRARY(bbtCalculatorCore STATIC)
 TARGET_SOURCES(bbtCalculatorCore
   PRIVATE
     core.cpp
+    workspace.cpp
 )
 
 TARGET_INCLUDE_DIRECTORIES(bbtCalculatorCore
@@ -16,4 +17,9 @@ TARGET_INCLUDE_DIRECTORIES(bbtCalculatorCore
 TARGET_LINK_LIBRARIES(bbtCalculatorCore
   PRIVATE
     bbtCalculatorGui
+)
+
+TARGET_COMPILE_FEATURES(bbtCalculatorCore
+  PUBLIC
+    cxx_std_17
 )
