@@ -7,31 +7,38 @@
 
 #include "workspace.hpp"
 
-namespace BBTCalculator::Gui
+namespace BBTCalculator
 {
-    class MainWindowController;
-    class MainWindow;
-}
-
-namespace BBTCalculator::Core
-{
-    class Core
+    namespace Gui
     {
-    public:
-        Core();
+        class MainWindowController;
 
-        void initializeApplication(BBTCalculator::Gui::MainWindowController& contr);
+        class MainWindow;
+    } // namespace Gui
+} // namespace BBTCalculator
 
-        void letUserSelectWorkspace();
+namespace BBTCalculator
+{
+    namespace Core
+     {
+        class Core
+        {
+        public:
+            Core();
 
-    private:
-        void setupTranslator();
+            void initializeApplication(BBTCalculator::Gui::MainWindowController& contr);
 
-        std::shared_ptr<BBTCalculator::Gui::MainWindow> mainWindow;
+            void letUserSelectWorkspace();
 
-        QTranslator translator;
+        private:
+            void setupTranslator();
 
-        Workspace workspace;
+            std::shared_ptr<BBTCalculator::Gui::MainWindow> mainWindow;
 
-    };
-}
+            QTranslator translator;
+
+            Workspace workspace;
+
+        };
+    } // namespace Core
+} // namespace BBTCalculator

@@ -10,34 +10,37 @@
 namespace Ui
 {
     class MainWindow;
-}
+} // namespace Ui
 
-namespace BBTCalculator::Gui
+namespace BBTCalculator
 {
-    class MainWindow : public QMainWindow
+    namespace Gui
     {
-    public:
-        explicit MainWindow(QWidget* parent = nullptr);
+        class MainWindow : public QMainWindow
+        {
+        public:
+            explicit MainWindow(QWidget* parent = nullptr);
 
-        ~MainWindow() override;
+            ~MainWindow() override;
 
-        void setController(MainWindowController* contr);
+            void setController(MainWindowController* contr);
 
-        void retranslateUi();
+            void retranslateUi();
 
-        auto letUserSelectWorkspaceDirectory() -> QString;
+            auto letUserSelectWorkspaceDirectory() -> QString;
 
-        void notifyUserSelectedDirectoryDoesNotExist();
+            void notifyUserSelectedDirectoryDoesNotExist();
 
-        void showRootPath(const QString& path);
+            void showRootPath(const QString& path);
 
-    private:
-        void setupMenuActions();
+        private:
+            void setupMenuActions();
 
-        void connectSignals();
+            void connectSignals();
 
-        Ui::MainWindow* ui;
+            Ui::MainWindow* ui;
 
-        MainWindowController* controller;
-    };
-}
+            MainWindowController* controller;
+        };
+    } // namespace Gui
+} // namespace BBTCalculator

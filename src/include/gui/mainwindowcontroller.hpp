@@ -8,8 +8,8 @@ namespace BBTCalculator
     namespace Core
     {
         class Core;
-    }
-}
+    } // namespace Core
+} // namespace BBTCalculator
 
 namespace BBTCalculator
 {
@@ -30,5 +30,5 @@ namespace BBTCalculator
         private:
             BBTCalculator::Core::Core* core;
         };
-    }
-}
+    } // namespace Gui
+} // namespace BBTCalculator

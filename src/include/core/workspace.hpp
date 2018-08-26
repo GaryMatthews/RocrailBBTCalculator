@@ -3,14 +3,17 @@
 
 #include <QtCore/QDir>
 
-namespace BBTCalculator::Core
+namespace BBTCalculator
 {
-    class Workspace
+    namespace Core
     {
-    public:
-        void setRootPath(const QDir& root);
-    private:
-        QDir rootPath;
-    };
-}
+        class Workspace
+        {
+        public:
+            void setRootPath(const QDir& root);
 
+        private:
+            QDir rootPath;
+        };
+    } // namespace Core
+} // namespace BBTCalculator
