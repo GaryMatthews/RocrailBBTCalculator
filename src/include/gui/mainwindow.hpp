@@ -26,6 +26,8 @@ namespace BBTCalculator
 
             void setController(MainWindowController* contr);
 
+            bool eventFilter(QObject* watched, QEvent* event) override;
+
             void retranslateUi();
 
             auto letUserSelectWorkspaceDirectory() -> QString;
@@ -46,6 +48,8 @@ namespace BBTCalculator
             Ui::MainWindow* ui;
 
             MainWindowController* controller;
+
+            QPixmap originalLocImage;
         };
     } // namespace Gui
 } // namespace BBTCalculator

@@ -2,9 +2,9 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 
+#include <QResizeEvent>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
-#include <mainwindow.hpp>
 
 using BBTCalculator::Gui::MainWindow;
 
@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->locList->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->locList->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->locList->horizontalHeader()->setStretchLastSection(true);
+
+    ui->locImage->installEventFilter(this);
 }
 
 MainWindow::~MainWindow()
@@ -30,6 +32,23 @@ void MainWindow::setController(MainWindowController *contr)
 {
     controller = contr;
     connectSignals();
+}
+
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if (watched == ui->locImage && event->type() == QEvent::Resize)
+    {
+        auto resizeEvent = dynamic_cast<QResizeEvent *>(event);
+
+        if (ui->locImage->pixmap() != nullptr)
+        {
+            ui->locImage->setPixmap(originalLocImage.scaled(
+                resizeEvent->size(), Qt::KeepAspectRatio));
+            return true;
+        }
+        return false;
+    }
+    return QObject::eventFilter(watched, event);
 }
 
 void MainWindow::setupMenuActions()
@@ -78,7 +97,10 @@ void MainWindow::setLocTableModel(QAbstractTableModel *model)
 
 void MainWindow::displayLocImage(QPixmap &locImage)
 {
+    originalLocImage = locImage;
+
     ui->locImage->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    ui->locImage->setPixmap(locImage.scaled(ui->locImage->size(), Qt::KeepAspectRatio));
+    ui->locImage->setPixmap(
+        originalLocImage.scaled(ui->locImage->size(), Qt::KeepAspectRatio));
 }
