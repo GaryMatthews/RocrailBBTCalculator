@@ -6,6 +6,8 @@
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
 
+#include "planparser.hpp"
+
 using BBTCalculator::Core::Core;
 using BBTCalculator::Gui::MainWindow;
 using BBTCalculator::Gui::MainWindowController;
@@ -41,6 +43,10 @@ void BBTCalculator::Core::Core::letUserSelectWorkspace()
         {
             workspace.setRootPath(dir);
             mainWindow->showRootPath(dir.absolutePath());
+            PlanParser parser(workspace.getPlanFilePath());
+            parser.parse();
+
+            workspace.setLocList(parser.getLocList());
         }
         else {
             mainWindow->notifyUserSelectedDirectoryDoesNotExist();

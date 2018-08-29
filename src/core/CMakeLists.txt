@@ -4,6 +4,7 @@ ADD_LIBRARY(bbtCalculatorCore STATIC)
 TARGET_SOURCES(bbtCalculatorCore
   PRIVATE
     core.cpp
+    planparser.cpp
     workspace.cpp
 )
 
@@ -16,6 +17,8 @@ TARGET_INCLUDE_DIRECTORIES(bbtCalculatorCore
 
 TARGET_LINK_LIBRARIES(bbtCalculatorCore
   PRIVATE
+    Qt5::Xml
+
     bbtCalculatorGui
 )
 
