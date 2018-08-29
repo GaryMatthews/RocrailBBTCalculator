@@ -21,7 +21,9 @@ namespace BBTCalculator
 
             void setLocList(const LocList& locList);
 
-            auto getLocList() const -> const LocList&;
+            auto getLocList() -> LocList&;
+
+            auto getImagePath() const -> QString;
 
         private:
             QDir rootPath;

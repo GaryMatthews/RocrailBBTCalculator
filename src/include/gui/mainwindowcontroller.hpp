@@ -2,6 +2,7 @@
 #pragma once
 
 #include <QtCore/QObject>
+#include <QtCore/QItemSelection>
 
 namespace BBTCalculator
 {
@@ -26,6 +27,9 @@ namespace BBTCalculator
         public slots:
 
             void onOpenWorkspaceClicked(bool checked = false);
+
+            void onLocSelectionChanged(const QItemSelection& selected,
+                                       const QItemSelection& deselected);
 
         private:
             BBTCalculator::Core::Core* core;

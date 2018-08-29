@@ -1,3 +1,4 @@
+#include <memory>
 
 #include "core.hpp"
 
@@ -12,9 +13,11 @@ using BBTCalculator::Core::Core;
 using BBTCalculator::Gui::MainWindow;
 using BBTCalculator::Gui::MainWindowController;
 
-Core::Core::Core() :
-    mainWindow{new MainWindow()}
-{}
+Core::Core::Core()
+    : mainWindow{new MainWindow()}
+{
+    letUserSelectWorkspace();
+}
 
 void Core::initializeApplication(MainWindowController& contr)
 {
@@ -25,7 +28,8 @@ void Core::initializeApplication(MainWindowController& contr)
 
 void Core::setupTranslator()
 {
-    if (translator.load(QLocale(), QLatin1String("rocrailBBT"), QLatin1String("_"), QLatin1String("./gui/")))
+    if (translator.load(QLocale(), QLatin1String("rocrailBBT"),
+                        QLatin1String("_"), QLatin1String("./gui/")))
     {
         QApplication::installTranslator(&translator);
         mainWindow->retranslateUi();
@@ -34,7 +38,8 @@ void Core::setupTranslator()
 
 void BBTCalculator::Core::Core::letUserSelectWorkspace()
 {
-    QString userSelectedDirectory = mainWindow->letUserSelectWorkspaceDirectory();
+    QString userSelectedDirectory = QString(
+        "/home/markus/rocrail/MeinPlan");  // mainWindow->letUserSelectWorkspaceDirectory();
 
     if (not userSelectedDirectory.isEmpty())
     {
@@ -47,9 +52,36 @@ void BBTCalculator::Core::Core::letUserSelectWorkspace()
             parser.parse();
 
             workspace.setLocList(parser.getLocList());
+            locModel = std::make_unique<Gui::LocModel>(workspace.getLocList());
+
+            mainWindow->setLocTableModel(locModel.get());
         }
-        else {
+        else
+        {
             mainWindow->notifyUserSelectedDirectoryDoesNotExist();
+        }
+    }
+}
+
+void Core::displayImageForLocName(const QString& locName)
+{
+    const LocList& locList = workspace.getLocList();
+
+    const auto search = [locName](const Loc& item) {
+        return item.name == locName;
+    };
+
+    auto it = std::find_if(locList.begin(), locList.end(), search);
+
+    if (it != locList.end())
+    {
+        QFileInfo fileInfo(workspace.getImagePath() + it->imageName);
+
+        if (fileInfo.exists() && fileInfo.isFile())
+        {
+            QPixmap locImage{fileInfo.absoluteFilePath()};
+
+            mainWindow->displayLocImage(locImage);
         }
     }
 }

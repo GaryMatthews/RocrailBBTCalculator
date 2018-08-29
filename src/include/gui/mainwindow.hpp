@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <QtCore/QAbstractTableModel>
 #include <QtWidgets/QMainWindow>
 
 #include "mainwindowcontroller.hpp"
@@ -32,6 +33,10 @@ namespace BBTCalculator
             void notifyUserSelectedDirectoryDoesNotExist();
 
             void showRootPath(const QString& path);
+
+            void setLocTableModel(QAbstractTableModel* model);
+
+            void displayLocImage(QPixmap& locImage);
 
         private:
             void setupMenuActions();

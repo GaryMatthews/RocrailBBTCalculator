@@ -5,13 +5,12 @@
 #include <QtXml/QDomDocument>
 #include <planparser.hpp>
 
-
 #include "datastructs.hpp"
 
 using BBTCalculator::Core::PlanParser;
 
-PlanParser::PlanParser(std::string f) :
-    file{QString::fromStdString(f)}
+PlanParser::PlanParser(std::string f)
+    : file{QString::fromStdString(f)}
 {
     file.open(QIODevice::ReadWrite);
     if (not file.isOpen() or not file.isReadable())
@@ -35,15 +34,17 @@ void PlanParser::parse()
 
     locList.reserve(static_cast<unsigned long>(locs.length()));
 
-    for (int i = 0; i < locs.length(); ++i) {
+    for (int i = 0; i < locs.length(); ++i)
+    {
         const auto currentLoc = locs.at(i);
         const auto currentLocAttributes{currentLoc.attributes()};
 
-        const QDomAttr locNameAttr{currentLocAttributes.namedItem("id").toAttr()};
-        const QDomAttr locImagePathAttr{currentLocAttributes.namedItem("image").toAttr()};
+        const QDomAttr locNameAttr{
+            currentLocAttributes.namedItem("id").toAttr()};
+        const QDomAttr locImagePathAttr{
+            currentLocAttributes.namedItem("image").toAttr()};
 
-        Loc loc{locNameAttr.value(),
-                locImagePathAttr.value()};
+        Loc loc{locNameAttr.value(), locImagePathAttr.value()};
 
         locList.emplace_back(loc);
     }
@@ -53,4 +54,3 @@ auto PlanParser::getLocList() const -> BBTCalculator::Core::LocList
 {
     return locList;
 }
-

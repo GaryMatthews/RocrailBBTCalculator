@@ -10,16 +10,22 @@ using BBTCalculator::Gui::MainWindowController;
 
 MainWindowController::MainWindowController() :
     core{nullptr}
-{
+{}
 
-}
-
-void MainWindowController::setCore(BBTCalculator::Core::Core* c)
+void MainWindowController::setCore(BBTCalculator::Core::Core *c)
 {
     core = c;
 }
 
 void MainWindowController::onOpenWorkspaceClicked(bool)
 {
-    core->letUserSelectWorkspace();
+  core->letUserSelectWorkspace();
+}
+
+void MainWindowController::onLocSelectionChanged(const QItemSelection& selected,
+                                                 const QItemSelection& deselected)
+{
+    const QItemSelectionRange& singleRow{selected.at(0)};
+
+    core->displayImageForLocName(singleRow.indexes().at(0).data().toString());
 }

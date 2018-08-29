@@ -24,7 +24,12 @@ void Workspace::setLocList(const BBTCalculator::Core::LocList& lList)
     locList = lList;
 }
 
-auto Workspace::getLocList() const -> const BBTCalculator::Core::LocList&
+auto Workspace::getLocList() -> BBTCalculator::Core::LocList&
 {
     return locList;
+}
+
+auto Workspace::getImagePath() const -> QString
+{
+    return QString(rootPath.absoluteFilePath("images/"));
 }

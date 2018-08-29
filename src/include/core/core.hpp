@@ -5,6 +5,8 @@
 
 #include <QtCore/QTranslator>
 
+#include "gui/locmodel.hpp"
+
 #include "workspace.hpp"
 
 namespace BBTCalculator
@@ -30,6 +32,8 @@ namespace BBTCalculator
 
             void letUserSelectWorkspace();
 
+            void displayImageForLocName(const QString& locName);
+
         private:
             void setupTranslator();
 
@@ -38,6 +42,8 @@ namespace BBTCalculator
             QTranslator translator;
 
             Workspace workspace;
+
+            std::unique_ptr<Gui::LocModel> locModel;
 
         };
     } // namespace Core
