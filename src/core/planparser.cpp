@@ -32,6 +32,15 @@ void PlanParser::parse()
 
     QDomNodeList locs = root.elementsByTagName("lc");
 
+    parseLocs(locs);
+
+    QDomNodeList blocks = root.elementsByTagName("bk");
+
+    parseBlocks(blocks);
+}
+
+void PlanParser::parseLocs(const QDomNodeList& locs)
+{
     locList.reserve(static_cast<unsigned long>(locs.length()));
 
     for (int i = 0; i < locs.length(); ++i)
@@ -54,7 +63,8 @@ void PlanParser::parse()
         const QDomAttr vCruAttribute{
             currentLocAttributes.namedItem("V_cru").toAttr()};
 
-        Loc loc{locNameAttr.value(), locImagePathAttr.value(),
+        Loc loc{locNameAttr.value(),
+                locImagePathAttr.value(),
                 convertStringToBool(useBBTAttribute.value()),
                 bbtStepsAttribute.value().toInt(),
                 vMinAttribute.value().toInt(),
@@ -65,9 +75,37 @@ void PlanParser::parse()
     }
 }
 
+void PlanParser::parseBlocks(const QDomNodeList& blocks)
+{
+    blockList.reserve(static_cast<unsigned long>(blocks.length()));
+
+    for (int i = 0; i < blocks.length(); ++i)
+    {
+        const auto currentBlock = blocks.at(i);
+        const auto currentBlockAttributes{currentBlock.attributes()};
+
+        const QDomAttr blockNameAttr{
+            currentBlockAttributes.namedItem("id").toAttr()};
+        const QDomAttr isMainLineAttribute{
+            currentBlockAttributes.namedItem("mainline").toAttr()};
+        const QDomAttr blockLenAttribute{
+            currentBlockAttributes.namedItem("len").toAttr()};
+
+        Block block{blockNameAttr.value(), blockLenAttribute.value().toInt(),
+                    convertStringToBool(isMainLineAttribute.value())};
+
+        blockList.emplace_back(block);
+    }
+}
+
 auto PlanParser::getLocList() const -> BBTCalculator::Core::LocList
 {
     return locList;
+}
+
+auto PlanParser::getBlockList() const -> BBTCalculator::Core::BlockList
+{
+    return blockList;
 }
 
 auto PlanParser::convertStringToBool(const QString& string) -> bool

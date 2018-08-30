@@ -3,6 +3,7 @@
 #pragma once
 
 #include <QtCore/QFile>
+#include <QtXml/QDomNodeList>
 
 #include "datastructs.hpp"
 
@@ -19,11 +20,19 @@ namespace BBTCalculator
 
             auto getLocList() const -> LocList;
 
+            auto getBlockList() const -> BlockList;
+
         private:
+
+            void parseLocs(const QDomNodeList& locs);
+
+            void parseBlocks(const QDomNodeList& blocks);
 
             auto convertStringToBool(const QString& string) -> bool;
 
             LocList locList;
+
+            BlockList blockList;
 
             QFile file;
         };
