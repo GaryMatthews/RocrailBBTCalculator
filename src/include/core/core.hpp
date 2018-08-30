@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <QtCore/QTranslator>
+#include <QtCore/QSortFilterProxyModel>
 
 #include "gui/blockmodel.hpp"
 #include "gui/locmodel.hpp"
@@ -45,8 +46,10 @@ namespace BBTCalculator
             Workspace workspace;
 
             std::unique_ptr<Gui::LocModel> locModel;
-
             std::unique_ptr<Gui::BlockModel> blockModel;
+
+            std::unique_ptr<QSortFilterProxyModel> locSortFilterModel;
+            std::unique_ptr<QSortFilterProxyModel> blockSortFilterModel;
         };
     } // namespace Core
 } // namespace BBTCalculator

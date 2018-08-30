@@ -36,9 +36,9 @@ namespace BBTCalculator
 
             void showRootPath(const QString& path);
 
-            void setLocTableModel(QAbstractTableModel* model);
+            void setLocTableModel(QAbstractItemModel* model);
 
-            void setBlockTableModel(QAbstractTableModel* model);
+            void setBlockTableModel(QAbstractItemModel* model);
 
             void displayLocImage(QPixmap& locImage);
 

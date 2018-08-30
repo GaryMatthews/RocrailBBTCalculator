@@ -5,8 +5,9 @@
 #include <QResizeEvent>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
-#include <mainwindow.hpp>
 
+#include "blockmodel.hpp"
+#include "locmodel.hpp"
 
 using BBTCalculator::Gui::MainWindow;
 
@@ -20,10 +21,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->locList->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->locList->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->locList->setSortingEnabled(true);
     ui->locList->horizontalHeader()->setStretchLastSection(true);
 
     ui->blockTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->blockTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->blockTable->setSortingEnabled(true);
     ui->blockTable->horizontalHeader()->setStretchLastSection(true);
 
     ui->locImage->installEventFilter(this);
@@ -96,18 +99,22 @@ void MainWindow::showRootPath(const QString &path)
     this->setWindowTitle(path);
 }
 
-void MainWindow::setLocTableModel(QAbstractTableModel *model)
+void MainWindow::setLocTableModel(QAbstractItemModel *model)
 {
     ui->locList->setModel(model);
 
     ui->locList->resizeColumnsToContents();
+    ui->locList->sortByColumn(static_cast<int>(LocViewColumns::NAME),
+                              Qt::AscendingOrder);
 }
 
-void MainWindow::setBlockTableModel(QAbstractTableModel* model)
+void MainWindow::setBlockTableModel(QAbstractItemModel *model)
 {
     ui->blockTable->setModel(model);
 
     ui->blockTable->resizeColumnsToContents();
+    ui->blockTable->sortByColumn(static_cast<int>(BlockViewColumns::NAME),
+                                 Qt::AscendingOrder);
 }
 
 void MainWindow::displayLocImage(QPixmap &locImage)

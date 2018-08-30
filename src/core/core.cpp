@@ -57,8 +57,14 @@ void BBTCalculator::Core::Core::letUserSelectWorkspace()
             locModel = std::make_unique<Gui::LocModel>(workspace.getLocList());
             blockModel = std::make_unique<Gui::BlockModel>(workspace.getBlockList());
 
-            mainWindow->setLocTableModel(locModel.get());
-            mainWindow->setBlockTableModel(blockModel.get());
+            locSortFilterModel = std::make_unique<QSortFilterProxyModel>();
+            blockSortFilterModel = std::make_unique<QSortFilterProxyModel>();
+
+            locSortFilterModel->setSourceModel(locModel.get());
+            blockSortFilterModel->setSourceModel(blockModel.get());
+
+            mainWindow->setLocTableModel(locSortFilterModel.get());
+            mainWindow->setBlockTableModel(blockSortFilterModel.get());
         }
         else
         {
