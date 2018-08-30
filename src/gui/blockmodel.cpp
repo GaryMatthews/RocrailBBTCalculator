@@ -75,8 +75,3 @@ QVariant BlockModel::headerData(int section, Qt::Orientation orientation,
     }
     return QVariant();
 }
-
-Qt::ItemFlags BlockModel::flags(const QModelIndex& index) const
-{
-    return QAbstractTableModel::flags(index);
-}

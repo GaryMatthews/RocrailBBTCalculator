@@ -91,13 +91,3 @@ QVariant LocModel::headerData(int section, Qt::Orientation orientation,
     }
     return QVariant();
 }
-
-Qt::ItemFlags LocModel::flags(const QModelIndex& index) const
-{
-    if (index.isValid() &&
-        not locList.at(static_cast<unsigned long>(index.row())).useBBT)
-    {
-        return QAbstractTableModel::flags(index) & ~Qt::ItemIsEnabled;
-    }
-    return QAbstractTableModel::flags(index);
-}

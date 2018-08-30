@@ -34,8 +34,6 @@ namespace BBTCalculator
 
             QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-            Qt::ItemFlags flags(const QModelIndex& index) const override;
-
         private:
             Core::LocList& locList;
         };
