@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 
 #include <QResizeEvent>
+#include <QtCore/QSettings>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
@@ -30,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->blockTable->horizontalHeader()->setStretchLastSection(true);
 
     ui->locImage->installEventFilter(this);
+
+    QSettings settings;
+    this->restoreGeometry(settings.value("mainwindow/geometry").toByteArray());
 }
 
 MainWindow::~MainWindow()
@@ -69,6 +73,13 @@ void MainWindow::setupMenuActions()
 void MainWindow::retranslateUi()
 {
     ui->retranslateUi(this);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    QSettings settings;
+    settings.setValue("mainwindow/geometry", this->saveGeometry());
+    QWidget::closeEvent(event);
 }
 
 void MainWindow::connectSignals()

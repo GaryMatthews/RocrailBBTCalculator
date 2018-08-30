@@ -30,6 +30,8 @@ namespace BBTCalculator
 
             void retranslateUi();
 
+            void closeEvent(QCloseEvent* event) override;
+
             auto letUserSelectWorkspaceDirectory() -> QString;
 
             void notifyUserSelectedDirectoryDoesNotExist();
