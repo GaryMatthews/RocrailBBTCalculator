@@ -19,14 +19,24 @@ auto Workspace::getPlanFilePath() const -> const std::string&
     return planFilePath;
 }
 
-void Workspace::setLocList(const BBTCalculator::Core::LocList& lList)
+void Workspace::setLocList(const LocList& lList)
 {
     locList = lList;
 }
 
-auto Workspace::getLocList() -> BBTCalculator::Core::LocList&
+auto Workspace::getLocList() -> LocList&
 {
     return locList;
+}
+
+void Workspace::setBlockList(const BlockList& lList)
+{
+    blockList = lList;
+}
+
+auto Workspace::getBlockList() -> BlockList&
+{
+    return blockList;
 }
 
 auto Workspace::getImagePath() const -> QString

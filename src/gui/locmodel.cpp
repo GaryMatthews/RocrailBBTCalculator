@@ -21,7 +21,7 @@ int LocModel::rowCount(const QModelIndex& parent) const
 
 int LocModel::columnCount(const QModelIndex& parent) const
 {
-    return NUMBER_OF_COLUMNS;
+    return static_cast<int>(LocViewColumns::NUMBER_OF_COLUMNS);
 }
 
 QVariant LocModel::data(const QModelIndex& index, int role) const
@@ -31,7 +31,7 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
 
     if (role == Qt::DisplayRole)
     {
-        switch (index.column())
+        switch (static_cast<LocViewColumns>(index.column()))
         {
         case LocViewColumns::NAME:
             return locList.at(static_cast<unsigned long>(index.row())).name;
@@ -51,7 +51,7 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
     {
         const bool useBBT{
             locList.at(static_cast<unsigned long>(index.row())).useBBT};
-        switch (index.column())
+        switch (static_cast<LocViewColumns>(index.column()))
         {
         case LocViewColumns::BBT:
             return useBBT ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
@@ -71,7 +71,7 @@ QVariant LocModel::headerData(int section, Qt::Orientation orientation,
 
     if (orientation == Qt::Horizontal)
     {
-        switch (section)
+        switch (static_cast<LocViewColumns>(section))
         {
         case LocViewColumns::BBT:
             return tr("BBT");

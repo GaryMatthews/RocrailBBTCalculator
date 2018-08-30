@@ -10,21 +10,19 @@ namespace BBTCalculator
 {
     namespace Gui
     {
-        enum class LocViewColumns
+        enum class BlockViewColumns
         {
-            BBT = 0,
+            MAINLINE = 0,
             NAME,
-            BBT_STEPS,
-            V_MIN,
-            V_MID,
-            V_CRU,
+            LEN,
             NUMBER_OF_COLUMNS
         };
 
-        class LocModel : public QAbstractTableModel
+        class BlockModel : public QAbstractTableModel
         {
         public:
-            explicit LocModel(Core::LocList& lList, QObject* parent = nullptr);
+            explicit BlockModel(Core::BlockList& lList,
+                                QObject* parent = nullptr);
 
             int rowCount(const QModelIndex& parent) const override;
 
@@ -32,13 +30,13 @@ namespace BBTCalculator
 
             QVariant data(const QModelIndex& index, int role) const override;
 
-            QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+            QVariant headerData(int section, Qt::Orientation orientation,
+                                int role) const override;
 
             Qt::ItemFlags flags(const QModelIndex& index) const override;
 
         private:
-            Core::LocList& locList;
+            Core::BlockList& blockList;
         };
     }
 }
-

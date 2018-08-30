@@ -5,6 +5,7 @@
 
 #include <QtCore/QTranslator>
 
+#include "gui/blockmodel.hpp"
 #include "gui/locmodel.hpp"
 
 #include "workspace.hpp"
@@ -22,13 +23,13 @@ namespace BBTCalculator
 namespace BBTCalculator
 {
     namespace Core
-     {
+    {
         class Core
         {
         public:
             Core();
 
-            void initializeApplication(BBTCalculator::Gui::MainWindowController& contr);
+            void initializeApplication(Gui::MainWindowController& contr);
 
             void letUserSelectWorkspace();
 
@@ -37,7 +38,7 @@ namespace BBTCalculator
         private:
             void setupTranslator();
 
-            std::shared_ptr<BBTCalculator::Gui::MainWindow> mainWindow;
+            std::shared_ptr<Gui::MainWindow> mainWindow;
 
             QTranslator translator;
 
@@ -45,6 +46,7 @@ namespace BBTCalculator
 
             std::unique_ptr<Gui::LocModel> locModel;
 
+            std::unique_ptr<Gui::BlockModel> blockModel;
         };
     } // namespace Core
 } // namespace BBTCalculator

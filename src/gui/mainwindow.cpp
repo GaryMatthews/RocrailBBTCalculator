@@ -5,6 +5,8 @@
 #include <QResizeEvent>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
+#include <mainwindow.hpp>
+
 
 using BBTCalculator::Gui::MainWindow;
 
@@ -19,6 +21,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->locList->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->locList->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->locList->horizontalHeader()->setStretchLastSection(true);
+
+    ui->blockTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->blockTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->blockTable->horizontalHeader()->setStretchLastSection(true);
 
     ui->locImage->installEventFilter(this);
 }
@@ -95,6 +101,13 @@ void MainWindow::setLocTableModel(QAbstractTableModel *model)
     ui->locList->setModel(model);
 
     ui->locList->resizeColumnsToContents();
+}
+
+void MainWindow::setBlockTableModel(QAbstractTableModel* model)
+{
+    ui->blockTable->setModel(model);
+
+    ui->blockTable->resizeColumnsToContents();
 }
 
 void MainWindow::displayLocImage(QPixmap &locImage)

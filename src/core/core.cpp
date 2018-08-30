@@ -52,9 +52,13 @@ void BBTCalculator::Core::Core::letUserSelectWorkspace()
             parser.parse();
 
             workspace.setLocList(parser.getLocList());
+            workspace.setBlockList(parser.getBlockList());
+
             locModel = std::make_unique<Gui::LocModel>(workspace.getLocList());
+            blockModel = std::make_unique<Gui::BlockModel>(workspace.getBlockList());
 
             mainWindow->setLocTableModel(locModel.get());
+            mainWindow->setBlockTableModel(blockModel.get());
         }
         else
         {

@@ -23,6 +23,10 @@ namespace BBTCalculator
 
             auto getLocList() -> LocList&;
 
+            void setBlockList(const BlockList& locList);
+
+            auto getBlockList() -> BlockList&;
+
             auto getImagePath() const -> QString;
 
         private:
@@ -31,6 +35,7 @@ namespace BBTCalculator
             std::string planFilePath;
 
             LocList locList;
+            BlockList blockList;
         };
     } // namespace Core
 } // namespace BBTCalculator
