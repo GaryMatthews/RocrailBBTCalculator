@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons">
+    <file alias="pass">icons/48px-Dialog-accept.png</file>
+    <file alias="fail">icons/48px-Dialog-error-round.png</file>
+</qresource>
+</RCC>

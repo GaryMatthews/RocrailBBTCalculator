@@ -93,6 +93,8 @@ void MainWindow::showRootPath(const QString &path)
 void MainWindow::setLocTableModel(QAbstractTableModel *model)
 {
     ui->locList->setModel(model);
+
+    ui->locList->resizeColumnsToContents();
 }
 
 void MainWindow::displayLocImage(QPixmap &locImage)

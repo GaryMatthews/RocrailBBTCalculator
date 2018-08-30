@@ -16,6 +16,8 @@ int main(int argc, char* argv[])
     QApplication::setApplicationName("rocrailBBTCalculator");
     QApplication::setApplicationDisplayName("Rocrail BBT Calculator");
 
+    Q_INIT_RESOURCE(application);
+
     Core core{};
 
     MainWindowController controller{};

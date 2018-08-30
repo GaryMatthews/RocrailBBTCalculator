@@ -27,5 +27,5 @@ void MainWindowController::onLocSelectionChanged(const QItemSelection& selected,
 {
     const QItemSelectionRange& singleRow{selected.at(0)};
 
-    core->displayImageForLocName(singleRow.indexes().at(0).data().toString());
+    core->displayImageForLocName(singleRow.indexes().at(LocViewColumns::NAME).data().toString());
 }

@@ -43,8 +43,11 @@ void PlanParser::parse()
             currentLocAttributes.namedItem("id").toAttr()};
         const QDomAttr locImagePathAttr{
             currentLocAttributes.namedItem("image").toAttr()};
+        const QDomAttr useBBTAttribute{
+            currentLocAttributes.namedItem("usebbt").toAttr()};
 
-        Loc loc{locNameAttr.value(), locImagePathAttr.value()};
+        Loc loc{locNameAttr.value(), locImagePathAttr.value(),
+                convertStringToBool(useBBTAttribute.value())};
 
         locList.emplace_back(loc);
     }
@@ -53,4 +56,9 @@ void PlanParser::parse()
 auto PlanParser::getLocList() const -> BBTCalculator::Core::LocList
 {
     return locList;
+}
+
+auto PlanParser::convertStringToBool(const QString& string) -> bool
+{
+    return string.toUpper() == "TRUE";
 }

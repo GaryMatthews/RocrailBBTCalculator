@@ -2,6 +2,7 @@ SET(CMAKE_AUTOUIC ON)
 SET(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/forms)
 
 SET(CMAKE_AUTOMOC ON)
+SET(CMAKE_AUTORCC ON)
 
 FIND_PACKAGE(Qt5LinguistTools REQUIRED)
 
@@ -21,6 +22,8 @@ TARGET_SOURCES(bbtCalculatorGui
 
     ${CMAKE_SOURCE_DIR}/src/include/gui/mainwindow.hpp
     ${CMAKE_SOURCE_DIR}/src/include/gui/mainwindowcontroller.hpp
+
+    application.qrc
 
     ${QM}
 )

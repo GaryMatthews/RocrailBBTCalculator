@@ -21,6 +21,8 @@ namespace BBTCalculator
 
         private:
 
+            auto convertStringToBool(const QString& string) -> bool;
+
             LocList locList;
 
             QFile file;

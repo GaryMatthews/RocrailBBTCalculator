@@ -10,6 +10,12 @@ namespace BBTCalculator
 {
     namespace Gui
     {
+        enum LocViewColumns
+        {
+            BBT = 0,
+            NAME
+        };
+
         class LocModel : public QAbstractTableModel
         {
         public:
@@ -22,6 +28,8 @@ namespace BBTCalculator
             QVariant data(const QModelIndex& index, int role) const override;
 
             QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+
+            Qt::ItemFlags flags(const QModelIndex& index) const override;
 
         private:
             Core::LocList& locList;
