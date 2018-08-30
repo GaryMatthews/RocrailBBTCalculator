@@ -45,9 +45,21 @@ void PlanParser::parse()
             currentLocAttributes.namedItem("image").toAttr()};
         const QDomAttr useBBTAttribute{
             currentLocAttributes.namedItem("usebbt").toAttr()};
+        const QDomAttr bbtStepsAttribute{
+            currentLocAttributes.namedItem("bbtsteps").toAttr()};
+        const QDomAttr vMinAttribute{
+            currentLocAttributes.namedItem("V_min").toAttr()};
+        const QDomAttr vMidAttribute{
+            currentLocAttributes.namedItem("V_mid").toAttr()};
+        const QDomAttr vCruAttribute{
+            currentLocAttributes.namedItem("V_cru").toAttr()};
 
         Loc loc{locNameAttr.value(), locImagePathAttr.value(),
-                convertStringToBool(useBBTAttribute.value())};
+                convertStringToBool(useBBTAttribute.value()),
+                bbtStepsAttribute.value().toInt(),
+                vMinAttribute.value().toInt(),
+                vMidAttribute.value().toInt(),
+                vCruAttribute.value().toInt()};
 
         locList.emplace_back(loc);
     }

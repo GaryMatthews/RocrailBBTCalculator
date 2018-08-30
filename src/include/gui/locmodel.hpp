@@ -13,7 +13,12 @@ namespace BBTCalculator
         enum LocViewColumns
         {
             BBT = 0,
-            NAME
+            NAME,
+            BBT_STEPS,
+            V_MIN,
+            V_MID,
+            V_CRU,
+            NUMBER_OF_COLUMNS
         };
 
         class LocModel : public QAbstractTableModel

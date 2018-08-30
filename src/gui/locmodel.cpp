@@ -21,7 +21,7 @@ int LocModel::rowCount(const QModelIndex& parent) const
 
 int LocModel::columnCount(const QModelIndex& parent) const
 {
-    return 2;
+    return NUMBER_OF_COLUMNS;
 }
 
 QVariant LocModel::data(const QModelIndex& index, int role) const
@@ -33,10 +33,18 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
     {
         switch (index.column())
         {
-            case LocViewColumns::NAME:
-                return locList.at(static_cast<unsigned long>(index.row())).name;
-            default:
-                return QVariant();
+        case LocViewColumns::NAME:
+            return locList.at(static_cast<unsigned long>(index.row())).name;
+        case LocViewColumns::BBT_STEPS:
+            return locList.at(static_cast<unsigned long>(index.row())).bbtSteps;
+        case LocViewColumns::V_MIN:
+            return locList.at(static_cast<unsigned long>(index.row())).v_min;
+        case LocViewColumns::V_MID:
+            return locList.at(static_cast<unsigned long>(index.row())).v_mid;
+        case LocViewColumns::V_CRU:
+            return locList.at(static_cast<unsigned long>(index.row())).v_cru;
+        default:
+            return QVariant();
         }
     }
     if (role == Qt::DecorationRole)
@@ -45,11 +53,11 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
             locList.at(static_cast<unsigned long>(index.row())).useBBT};
         switch (index.column())
         {
-            case LocViewColumns::BBT:
-                return useBBT ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                              : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
-            default:
-                return QVariant();
+        case LocViewColumns::BBT:
+            return useBBT ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
+                          : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+        default:
+            return QVariant();
         }
     }
     return QVariant();
@@ -65,12 +73,20 @@ QVariant LocModel::headerData(int section, Qt::Orientation orientation,
     {
         switch (section)
         {
-            case LocViewColumns::BBT:
-                return tr("BBT");
-            case LocViewColumns::NAME:
-                return tr("Name");
-            default:
-                return QVariant();
+        case LocViewColumns::BBT:
+            return tr("BBT");
+        case LocViewColumns::NAME:
+            return tr("Name");
+        case LocViewColumns::BBT_STEPS:
+            return tr("BBT Steps");
+        case LocViewColumns::V_MIN:
+            return tr("V min");
+        case LocViewColumns::V_MID:
+            return tr("V mid");
+        case LocViewColumns::V_CRU:
+            return tr("V cru");
+        default:
+            return QVariant();
         }
     }
     return QVariant();

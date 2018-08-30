@@ -15,6 +15,11 @@ namespace BBTCalculator
             QString imageName = "";
 
             bool useBBT;
+            int bbtSteps;
+
+            int v_min;
+            int v_mid;
+            int v_cru;
         };
 
         using LocList = std::vector<Loc>;
