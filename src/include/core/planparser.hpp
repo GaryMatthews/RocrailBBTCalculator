@@ -23,7 +23,6 @@ namespace BBTCalculator
             auto getBlockList() const -> BlockList;
 
         private:
-
             void parseLocs(const QDomNodeList& locs);
 
             void parseBlocks(const QDomNodeList& blocks);
@@ -36,5 +35,5 @@ namespace BBTCalculator
 
             QFile file;
         };
-    }
-}
+    } // namespace Core
+} // namespace BBTCalculator

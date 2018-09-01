@@ -1,12 +1,11 @@
-#include <memory>
-
 #include "core.hpp"
+
+#include <memory>
 
 #include <QtWidgets/QtWidgets>
 
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
-
 #include "planparser.hpp"
 
 using BBTCalculator::Core::Core;
@@ -39,7 +38,7 @@ void Core::setupTranslator()
 void BBTCalculator::Core::Core::letUserSelectWorkspace()
 {
     QString userSelectedDirectory = QString(
-        "/home/markus/rocrail/MeinPlan");  // mainWindow->letUserSelectWorkspaceDirectory();
+        "/home/markus/rocrail/MeinPlan"); // mainWindow->letUserSelectWorkspaceDirectory();
 
     if (not userSelectedDirectory.isEmpty())
     {
@@ -55,7 +54,8 @@ void BBTCalculator::Core::Core::letUserSelectWorkspace()
             workspace.setBlockList(parser.getBlockList());
 
             locModel = std::make_unique<Gui::LocModel>(workspace.getLocList());
-            blockModel = std::make_unique<Gui::BlockModel>(workspace.getBlockList());
+            blockModel =
+                std::make_unique<Gui::BlockModel>(workspace.getBlockList());
 
             locSortFilterModel = std::make_unique<QSortFilterProxyModel>();
             blockSortFilterModel = std::make_unique<QSortFilterProxyModel>();

@@ -1,18 +1,19 @@
 
 #include "mainwindow.hpp"
-#include "ui_mainwindow.h"
 
 #include <QResizeEvent>
+
 #include <QtCore/QSettings>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
 #include "blockmodel.hpp"
 #include "locmodel.hpp"
+#include "ui_mainwindow.h"
 
 using BBTCalculator::Gui::MainWindow;
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -41,17 +42,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setController(MainWindowController *contr)
+void MainWindow::setController(MainWindowController* contr)
 {
     controller = contr;
     connectSignals();
 }
 
-bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
     if (watched == ui->locImage && event->type() == QEvent::Resize)
     {
-        auto resizeEvent = dynamic_cast<QResizeEvent *>(event);
+        auto resizeEvent = dynamic_cast<QResizeEvent*>(event);
 
         if (ui->locImage->pixmap() != nullptr)
         {
@@ -105,12 +106,12 @@ void MainWindow::notifyUserSelectedDirectoryDoesNotExist()
                              "exist."));
 }
 
-void MainWindow::showRootPath(const QString &path)
+void MainWindow::showRootPath(const QString& path)
 {
     this->setWindowTitle(path);
 }
 
-void MainWindow::setLocTableModel(QAbstractItemModel *model)
+void MainWindow::setLocTableModel(QAbstractItemModel* model)
 {
     ui->locList->setModel(model);
 
@@ -119,7 +120,7 @@ void MainWindow::setLocTableModel(QAbstractItemModel *model)
                               Qt::AscendingOrder);
 }
 
-void MainWindow::setBlockTableModel(QAbstractItemModel *model)
+void MainWindow::setBlockTableModel(QAbstractItemModel* model)
 {
     ui->blockTable->setModel(model);
 
@@ -128,7 +129,7 @@ void MainWindow::setBlockTableModel(QAbstractItemModel *model)
                                  Qt::AscendingOrder);
 }
 
-void MainWindow::displayLocImage(QPixmap &locImage)
+void MainWindow::displayLocImage(QPixmap& locImage)
 {
     originalLocImage = locImage;
 

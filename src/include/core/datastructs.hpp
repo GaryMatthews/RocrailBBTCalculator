@@ -1,9 +1,8 @@
 
 #pragma once
 
-#include <vector>
-
 #include <QString>
+#include <vector>
 
 namespace BBTCalculator
 {
@@ -32,9 +31,8 @@ namespace BBTCalculator
 
             // Some blocks have set mainline false but usebbt to true
             bool isMainLine{false};
-
         };
 
         using BlockList = std::vector<Block>;
-    }
-}
+    } // namespace Core
+} // namespace BBTCalculator

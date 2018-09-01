@@ -1,8 +1,5 @@
 
 
-#include <iostream>
-#include <workspace.hpp>
-
 #include "workspace.hpp"
 
 using BBTCalculator::Core::Workspace;

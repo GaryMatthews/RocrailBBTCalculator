@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include <QtCore/QTranslator>
 #include <QtCore/QSortFilterProxyModel>
+#include <QtCore/QTranslator>
 
 #include "gui/blockmodel.hpp"
 #include "gui/locmodel.hpp"
