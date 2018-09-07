@@ -1,7 +1,7 @@
 
-#include <mainwindowcontroller.hpp>
-
 #include "mainwindowcontroller.hpp"
+
+#include <mainwindowcontroller.hpp>
 
 #include "core/core.hpp"
 
@@ -28,8 +28,10 @@ void MainWindowController::onLocSelectionChanged(
 {
     const QItemSelectionRange& singleRow{selected.at(0)};
 
-    core->displayImageForLocName(singleRow.indexes()
-                                     .at(static_cast<int>(LocViewColumns::NAME))
-                                     .data()
-                                     .toString());
+    const QString locName{singleRow.indexes()
+                              .at(static_cast<int>(LocViewColumns::NAME))
+                              .data()
+                              .toString()};
+    core->displayImageForLocName(locName);
+    core->createBBTModel(locName);
 }

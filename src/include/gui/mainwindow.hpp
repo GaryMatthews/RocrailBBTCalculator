@@ -44,6 +44,8 @@ namespace BBTCalculator
 
             void displayLocImage(QPixmap& locImage);
 
+            void setBBTTableModel(QAbstractItemModel* model);
+
         private:
             void setupMenuActions();
 

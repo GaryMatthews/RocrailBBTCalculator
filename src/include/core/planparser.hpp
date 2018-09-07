@@ -25,6 +25,8 @@ namespace BBTCalculator
         private:
             void parseLocs(const QDomNodeList& locs);
 
+            BBTList parseBBT(const QDomNode& node);
+
             void parseBlocks(const QDomNodeList& blocks);
 
             auto convertStringToBool(const QString& string) -> bool;

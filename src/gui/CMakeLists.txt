@@ -16,6 +16,7 @@ ADD_LIBRARY(bbtCalculatorGui STATIC)
 TARGET_SOURCES(bbtCalculatorGui
   PRIVATE
     blockmodel.cpp
+    bbtmodel.cpp
     locmodel.cpp
 
     mainwindow.cpp

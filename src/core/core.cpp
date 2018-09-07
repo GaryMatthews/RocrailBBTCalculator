@@ -6,6 +6,7 @@
 
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
+
 #include "planparser.hpp"
 
 using BBTCalculator::Core::Core;
@@ -38,7 +39,7 @@ void Core::setupTranslator()
 void BBTCalculator::Core::Core::letUserSelectWorkspace()
 {
     QString userSelectedDirectory = QString(
-        "/home/markus/rocrail/MeinPlan"); // mainWindow->letUserSelectWorkspaceDirectory();
+        "/home/markus/rocrailMeinPlan/"); // mainWindow->letUserSelectWorkspaceDirectory();
 
     if (not userSelectedDirectory.isEmpty())
     {
@@ -93,5 +94,24 @@ void Core::displayImageForLocName(const QString& locName)
 
             mainWindow->displayLocImage(locImage);
         }
+    }
+}
+
+void Core::createBBTModel(const QString& locName)
+{
+    const LocList& locList = workspace.getLocList();
+
+    const auto search = [locName](Loc item) { return item.name == locName; };
+
+    auto it = std::find_if(locList.begin(), locList.end(), search);
+
+    if (it != locList.end())
+    {
+        bbtModel = std::make_unique<Gui::BBTModel>(it->bbt);
+
+        bbtSortFilterModel = std::make_unique<QSortFilterProxyModel>();
+        bbtSortFilterModel->setSourceModel(bbtModel.get());
+
+        mainWindow->setBBTTableModel(bbtSortFilterModel.get());
     }
 }

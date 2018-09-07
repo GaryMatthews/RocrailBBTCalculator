@@ -7,6 +7,7 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
+#include "bbtmodel.hpp"
 #include "blockmodel.hpp"
 #include "locmodel.hpp"
 #include "ui_mainwindow.h"
@@ -30,6 +31,11 @@ MainWindow::MainWindow(QWidget* parent)
     ui->blockTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->blockTable->setSortingEnabled(true);
     ui->blockTable->horizontalHeader()->setStretchLastSection(true);
+
+    ui->bbtTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->bbtTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->bbtTable->setSortingEnabled(true);
+    ui->bbtTable->horizontalHeader()->setStretchLastSection(true);
 
     ui->locImage->installEventFilter(this);
 
@@ -137,4 +143,13 @@ void MainWindow::displayLocImage(QPixmap& locImage)
 
     ui->locImage->setPixmap(
         originalLocImage.scaled(ui->locImage->size(), Qt::KeepAspectRatio));
+}
+
+void BBTCalculator::Gui::MainWindow::setBBTTableModel(QAbstractItemModel* model)
+{
+    ui->bbtTable->setModel(model);
+
+    ui->bbtTable->resizeColumnsToContents();
+    ui->bbtTable->sortByColumn(static_cast<int>(BBTViewColumns::BLOCK),
+                               Qt::AscendingOrder);
 }

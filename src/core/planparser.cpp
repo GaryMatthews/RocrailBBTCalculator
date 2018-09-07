@@ -2,11 +2,13 @@
 
 #include "planparser.hpp"
 
-#include <QtXml/QDomDocument>
 #include <planparser.hpp>
+
+#include <QtXml/QDomDocument>
 
 #include "datastructs.hpp"
 
+using BBTCalculator::Core::BBTList;
 using BBTCalculator::Core::PlanParser;
 
 PlanParser::PlanParser(std::string f)
@@ -71,8 +73,55 @@ void PlanParser::parseLocs(const QDomNodeList& locs)
                 vMidAttribute.value().toInt(),
                 vCruAttribute.value().toInt()};
 
+        loc.bbt = parseBBT(currentLoc);
+
         locList.emplace_back(loc);
     }
+}
+
+BBTList PlanParser::parseBBT(const QDomNode& node)
+{
+    QDomNodeList bbts = node.toElement().elementsByTagName("bbt");
+
+    BBTList bbtList;
+    bbtList.reserve(static_cast<unsigned long>(bbts.count()));
+
+    for (int i = 0; i < bbts.count(); ++i)
+    {
+        const auto currentBBT = bbts.at(i);
+        const auto currentBBTAttributes{currentBBT.attributes()};
+
+        const QDomAttr blockAttribute{
+            currentBBTAttributes.namedItem("bk").toAttr()};
+        const QDomAttr fromBlockAttribute{
+            currentBBTAttributes.namedItem("frombk").toAttr()};
+        const QDomAttr routeAttribute{
+            currentBBTAttributes.namedItem("route").toAttr()};
+        const QDomAttr intervalAttribute{
+            currentBBTAttributes.namedItem("interval").toAttr()};
+        const QDomAttr stepsAttribute{
+            currentBBTAttributes.namedItem("steps").toAttr()};
+        const QDomAttr speedAttribute{
+            currentBBTAttributes.namedItem("speed").toAttr()};
+        const QDomAttr blockEnterSideAttribute{
+            currentBBTAttributes.namedItem("blockenterside").toAttr()};
+        const QDomAttr countAttribute{
+            currentBBTAttributes.namedItem("count").toAttr()};
+        const QDomAttr fixedAttribute{
+            currentBBTAttributes.namedItem("isFixed").toAttr()};
+
+        BBT bbt{blockAttribute.value(),
+                fromBlockAttribute.value(),
+                routeAttribute.value(),
+                intervalAttribute.value().toInt(),
+                stepsAttribute.value().toInt(),
+                speedAttribute.value().toInt(),
+                blockAttribute.value().toInt(),
+                countAttribute.value().toInt(),
+                convertStringToBool(fixedAttribute.value())};
+        bbtList.emplace_back(bbt);
+    }
+    return bbtList;
 }
 
 void PlanParser::parseBlocks(const QDomNodeList& blocks)

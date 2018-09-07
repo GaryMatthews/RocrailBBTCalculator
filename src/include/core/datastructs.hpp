@@ -8,6 +8,23 @@ namespace BBTCalculator
 {
     namespace Core
     {
+        struct BBT
+        {
+            QString block = "";
+            QString fromBlock = "";
+            QString route = "";
+
+            int interval{0};
+            int steps{0};
+            int speed{0};
+            int blockenterside{1};
+            int count{0};
+
+            bool isFixed{false};
+        };
+
+        using BBTList = std::vector<BBT>;
+
         struct Loc
         {
             QString name = "";
@@ -19,6 +36,8 @@ namespace BBTCalculator
             int v_min{0};
             int v_mid{0};
             int v_cru{0};
+
+            BBTList bbt;
         };
 
         using LocList = std::vector<Loc>;
