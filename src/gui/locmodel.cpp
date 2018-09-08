@@ -43,6 +43,8 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
             return locList.at(static_cast<unsigned long>(index.row())).v_mid;
         case LocViewColumns::V_CRU:
             return locList.at(static_cast<unsigned long>(index.row())).v_cru;
+        case LocViewColumns::BBT:
+            return locList.at(static_cast<unsigned long>(index.row())).useBBT;
         default:
             return QVariant();
         }
