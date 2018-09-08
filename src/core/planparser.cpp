@@ -5,6 +5,7 @@
 #include <planparser.hpp>
 
 #include <QtXml/QDomDocument>
+#include <QtCore/QTextStream>
 
 #include "datastructs.hpp"
 
@@ -246,4 +247,58 @@ auto PlanParser::getRouteList() const -> BBTCalculator::Core::RouteList
 auto PlanParser::convertStringToBool(const QString& string) -> bool
 {
     return string.toUpper() == "TRUE";
+}
+
+void PlanParser::saveBBTForLocomotive(const Loc& loc)
+{
+    QDomDocument document("plan");
+    if (not document.setContent(&file))
+    {
+        // TODO: report error
+        file.close();
+    }
+
+    QDomElement root{document.documentElement()};
+
+    QDomNodeList locs = root.elementsByTagName("lc");
+
+    for (int i = 0; i < locs.length(); ++i)
+    {
+        auto currentLoc = locs.at(i);
+        const auto currentLocAttributes{currentLoc.attributes()};
+
+        const QDomAttr locNameAttr{
+            currentLocAttributes.namedItem("id").toAttr()};
+
+        if (locNameAttr.value() == loc.name)
+        {
+            QDomNodeList bbts = currentLoc.toElement().elementsByTagName("bbt");
+            while (not bbts.isEmpty()) {
+                QDomNode node = bbts.at(0);
+                currentLoc.removeChild(node);
+            }
+
+            for (auto currentBBT : loc.bbt)
+            {
+                QDomElement bbtElement = document.createElement("bbt");
+                bbtElement.setAttribute("bk", currentBBT.block);
+                bbtElement.setAttribute("frombk", currentBBT.fromBlock);
+                bbtElement.setAttribute("route", currentBBT.route);
+                bbtElement.setAttribute("interval", currentBBT.interval);
+                bbtElement.setAttribute("steps", currentBBT.steps);
+                bbtElement.setAttribute("speed", currentBBT.speed);
+                bbtElement.setAttribute("count", currentBBT.count);
+                bbtElement.setAttribute("fixed", currentBBT.isFixed ? "true" : "false");
+                bbtElement.setAttribute("bbtenterside", currentBBT.route.endsWith("+]") ? "1" : "2");
+                currentLoc.appendChild(bbtElement);
+            }
+            break;
+        }
+    }
+
+    file.resize(0);
+    QTextStream stream( &file );
+
+    stream << document.toString(2);
+    file.close();
 }

@@ -24,6 +24,8 @@ namespace BBTCalculator
 
             auto getRouteList() const -> RouteList;
 
+            void saveBBTForLocomotive(const Loc& loc);
+
         private:
             void parseLocs(const QDomNodeList& locs);
 

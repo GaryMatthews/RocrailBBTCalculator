@@ -175,5 +175,8 @@ void Core::calculateBBT(const QString& locName)
         calc.calculateNewBBTEntries(mainWindow->getUserSelectedCorrectionFactor());
 
         createBBTModel(locName);
+
+        PlanParser parser(workspace.getPlanFilePath());
+        parser.saveBBTForLocomotive(*it);
     }
 }
