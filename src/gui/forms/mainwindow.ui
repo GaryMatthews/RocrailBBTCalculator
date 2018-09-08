@@ -101,6 +101,10 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="toolTip">
+            <string>Minimum value: 0,5
+Maximum value: 1,5</string>
+           </property>
            <property name="prefix">
             <string/>
            </property>
