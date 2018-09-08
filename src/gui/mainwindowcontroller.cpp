@@ -27,15 +27,18 @@ void MainWindowController::onOpenWorkspaceClicked(bool)
 void MainWindowController::onLocSelectionChanged(
     const QItemSelection& selected, const QItemSelection& deselected)
 {
-    const QItemSelectionRange& singleRow{selected.at(0)};
+    if (not selected.isEmpty())
+    {
+        const QItemSelectionRange& singleRow{selected.at(0)};
 
-    const QString locName{singleRow.indexes()
-                              .at(static_cast<int>(LocViewColumns::NAME))
-                              .data()
-                              .toString()};
-    currentlySelectedLocName = locName;
-    core->displayImageForLocName(locName);
-    core->createBBTModel(locName);
+        const QString locName{singleRow.indexes()
+                                  .at(static_cast<int>(LocViewColumns::NAME))
+                                  .data()
+                                  .toString()};
+        currentlySelectedLocName = locName;
+        core->displayImageForLocName(locName);
+        core->createBBTModel(locName);
+    }
 }
 
 void MainWindowController::onFilterMainlineStateChanged(int state)
