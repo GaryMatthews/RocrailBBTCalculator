@@ -46,6 +46,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     ui->locImage->installEventFilter(this);
 
+    ui->calculateBBT->setEnabled(false);
+
     QSettings settings;
     this->restoreGeometry(settings.value("mainwindow/geometry").toByteArray());
 }
@@ -172,6 +174,8 @@ void BBTCalculator::Gui::MainWindow::setBBTTableModel(QAbstractItemModel* model)
     ui->bbtTable->resizeColumnsToContents();
     ui->bbtTable->sortByColumn(static_cast<int>(BBTViewColumns::BLOCK),
                                Qt::AscendingOrder);
+
+    ui->calculateBBT->setEnabled(true);
 }
 
 void MainWindow::setLocNameInBBTBox(const QString& locName)
