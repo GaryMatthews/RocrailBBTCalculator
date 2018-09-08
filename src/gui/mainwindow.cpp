@@ -61,6 +61,9 @@ void MainWindow::setController(MainWindowController* contr)
 {
     controller = contr;
     connectSignals();
+
+    QSettings settings;
+    ui->showMainlineOnly->setChecked(settings.value("showMainLineOnly", false).toBool());
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
@@ -95,6 +98,8 @@ void MainWindow::closeEvent(QCloseEvent* event)
 {
     QSettings settings;
     settings.setValue("mainwindow/geometry", this->saveGeometry());
+
+    settings.setValue("showMainLineOnly", ui->showMainlineOnly->isChecked());
     QWidget::closeEvent(event);
 }
 
