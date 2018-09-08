@@ -105,6 +105,8 @@ void MainWindow::connectSignals()
             &MainWindowController::onLocSelectionChanged);
     connect(ui->showMainlineOnly, &QCheckBox::stateChanged, controller,
             &MainWindowController::onFilterMainlineStateChanged);
+    connect(ui->calculateBBT, &QPushButton::clicked, controller,
+            &MainWindowController::onUserRequestsBBTCalculation);
 }
 
 auto MainWindow::letUserSelectWorkspaceDirectory() -> QString

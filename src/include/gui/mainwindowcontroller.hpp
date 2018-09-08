@@ -33,6 +33,8 @@ namespace BBTCalculator
 
             void onFilterMainlineStateChanged(int state);
 
+            void onUserRequestsBBTCalculation();
+
         private:
             BBTCalculator::Core::Core* core;
         };

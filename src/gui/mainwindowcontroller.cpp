@@ -1,4 +1,6 @@
 
+#include <mainwindowcontroller.hpp>
+
 #include "mainwindowcontroller.hpp"
 
 #include "core/core.hpp"
@@ -45,4 +47,9 @@ void MainWindowController::onFilterMainlineStateChanged(int state)
     {
         core->removeBlockAndRouteMainlineFilter();
     }
+}
+
+void MainWindowController::onUserRequestsBBTCalculation()
+{
+    core->calculateBBT();
 }

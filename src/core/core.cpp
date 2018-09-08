@@ -3,10 +3,11 @@
 #include <memory>
 
 #include <QtWidgets/QtWidgets>
-
+#include <iostream>
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
 
+#include "calculation.hpp"
 #include "planparser.hpp"
 
 using BBTCalculator::Core::Core;
@@ -142,4 +143,19 @@ void Core::filterBlockAndRouteByMainline(QSortFilterProxyModel* model, int colum
 {
     model->setFilterKeyColumn(column);
     model->setFilterRegExp("true");
+}
+
+void Core::calculateBBT()
+{
+    Loc& loc = workspace.getLocList().at(1);
+
+    BlockList&  blockList{workspace.getBlockList()};
+    RouteList& routeList{workspace.getRouteList()};
+
+    std::cout << "NUmber of BBT entries before calculation " << loc.bbt.size() << "\n";
+    Calculation calc{loc, routeList, blockList};
+    calc.caclulateNewBBTEntries();
+
+    std::cout << "NUmber of BBT entries after calculation " << loc.bbt.size() << "\n";
+    createBBTModel(loc.name);
 }

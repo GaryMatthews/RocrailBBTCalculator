@@ -46,6 +46,8 @@ namespace BBTCalculator
 
             void removeBlockAndRouteMainlineFilter();
 
+            void calculateBBT();
+
         private:
             void setupTranslator();
 
