@@ -1,7 +1,7 @@
 
-#include <mainwindowcontroller.hpp>
-
 #include "mainwindowcontroller.hpp"
+
+#include <mainwindowcontroller.hpp>
 
 #include "core/core.hpp"
 
@@ -10,6 +10,7 @@ using BBTCalculator::Gui::MainWindowController;
 
 MainWindowController::MainWindowController()
     : core{nullptr}
+    , currentlySelectedLocName{""}
 {
 }
 
@@ -32,6 +33,7 @@ void MainWindowController::onLocSelectionChanged(
                               .at(static_cast<int>(LocViewColumns::NAME))
                               .data()
                               .toString()};
+    currentlySelectedLocName = locName;
     core->displayImageForLocName(locName);
     core->createBBTModel(locName);
 }
@@ -40,8 +42,10 @@ void MainWindowController::onFilterMainlineStateChanged(int state)
 {
     if (state == Qt::Checked)
     {
-        core->filterBlockByMainline(static_cast<int>(BlockViewColumns::MAINLINE));
-        core->filterRouteByMainline(static_cast<int>(RouteViewColumns::MAINLINE));
+        core->filterBlockByMainline(
+            static_cast<int>(BlockViewColumns::MAINLINE));
+        core->filterRouteByMainline(
+            static_cast<int>(RouteViewColumns::MAINLINE));
     }
     else
     {
@@ -51,5 +55,5 @@ void MainWindowController::onFilterMainlineStateChanged(int state)
 
 void MainWindowController::onUserRequestsBBTCalculation()
 {
-    core->calculateBBT();
+    core->calculateBBT(currentlySelectedLocName);
 }

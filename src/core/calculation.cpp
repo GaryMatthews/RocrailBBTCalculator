@@ -3,14 +3,14 @@
 
 using BBTCalculator::Core::Calculation;
 
-Calculation::Calculation(Loc& l, RouteList& rList, BlockList& bList)
+Calculation::Calculation(Loc* l, const RouteList& rList, const BlockList& bList)
     : loc{l}
     , routes{rList}
     , blocks{bList}
 {
 }
 
-void Calculation::caclulateNewBBTEntries()
+void Calculation::calculateNewBBTEntries()
 {
     for (const auto& route : routes)
     {
@@ -23,7 +23,7 @@ void Calculation::caclulateNewBBTEntries()
             bbt.block = route.toBlock;
             bbt.count = 0;
 
-            bbt.speed = loc.v_cru;
+            bbt.speed = loc->v_cru;
 
             bbt.steps = 10;
 
@@ -44,7 +44,7 @@ void Calculation::caclulateNewBBTEntries()
                                                 speedMMPerSecondScaled / bbt.steps * 1000.0);
             }
 
-            loc.bbt.emplace_back(bbt);
+            loc->bbt.emplace_back(bbt);
         }
     }
 }

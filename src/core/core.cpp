@@ -3,7 +3,7 @@
 #include <memory>
 
 #include <QtWidgets/QtWidgets>
-#include <iostream>
+
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
 
@@ -147,17 +147,22 @@ void Core::filterBlockAndRouteByMainline(QSortFilterProxyModel* model, int colum
     model->setFilterRegExp("true");
 }
 
-void Core::calculateBBT()
+void Core::calculateBBT(const QString& locName)
 {
-    Loc& loc = workspace.getLocList().at(1);
+    LocList& locList = workspace.getLocList();
 
-    BlockList&  blockList{workspace.getBlockList()};
-    RouteList& routeList{workspace.getRouteList()};
+    const auto search = [locName](Loc item) { return item.name == locName; };
 
-    std::cout << "NUmber of BBT entries before calculation " << loc.bbt.size() << "\n";
-    Calculation calc{loc, routeList, blockList};
-    calc.caclulateNewBBTEntries();
+    auto it = std::find_if(locList.begin(), locList.end(), search);
 
-    std::cout << "NUmber of BBT entries after calculation " << loc.bbt.size() << "\n";
-    createBBTModel(loc.name);
+    if (it != locList.end())
+    {
+        BlockList& blockList{workspace.getBlockList()};
+        RouteList& routeList{workspace.getRouteList()};
+
+        Calculation calc{&(*it), routeList, blockList};
+        calc.calculateNewBBTEntries();
+
+        createBBTModel(locName);
+    }
 }

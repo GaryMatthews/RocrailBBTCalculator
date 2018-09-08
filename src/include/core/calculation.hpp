@@ -12,13 +12,13 @@ namespace BBTCalculator
         class Calculation
         {
         public:
-            Calculation(BBTCalculator::Core::Loc& l, BBTCalculator::Core::RouteList& rList, BlockList& bList);
+            Calculation(Loc* l, const RouteList& rList, const BlockList& bList);
 
-            void caclulateNewBBTEntries();
+            void calculateNewBBTEntries();
 
         private:
 
-            Loc& loc;
+            Loc* loc;
 
             const RouteList& routes;
 

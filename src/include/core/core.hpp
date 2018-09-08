@@ -46,7 +46,7 @@ namespace BBTCalculator
 
             void removeBlockAndRouteMainlineFilter();
 
-            void calculateBBT();
+            void calculateBBT(const QString& locName);
 
         private:
             void setupTranslator();

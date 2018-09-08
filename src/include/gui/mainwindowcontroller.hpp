@@ -37,6 +37,8 @@ namespace BBTCalculator
 
         private:
             BBTCalculator::Core::Core* core;
+
+            QString currentlySelectedLocName;
         };
     } // namespace Gui
 } // namespace BBTCalculator
