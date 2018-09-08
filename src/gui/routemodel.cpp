@@ -46,15 +46,26 @@ QVariant RouteModel::data(const QModelIndex& index, int role) const
             return QVariant();
         }
     }
-    if (role == Qt::DecorationRole &&
-        index.column() == static_cast<int>(RouteViewColumns::STRAIGHT))
+    if (role == Qt::DecorationRole)
     {
-        const bool isStraight{
-            routeList.at(static_cast<unsigned long>(index.row()))
-                .isCompletelyStraight};
+        if (index.column() == static_cast<int>(RouteViewColumns::STRAIGHT))
+        {
+            const bool isStraight{
+                routeList.at(static_cast<unsigned long>(index.row()))
+                    .isCompletelyStraight};
 
-        return isStraight ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                          : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+            return isStraight ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
+                              : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+        }
+        if (index.column() == static_cast<int>(RouteViewColumns::MAINLINE))
+        {
+            const bool isMainLine{
+                routeList.at(static_cast<unsigned long>(index.row()))
+                    .isOnlyMainline};
+
+            return isMainLine ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
+                              : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+        }
     }
     return QVariant();
 }

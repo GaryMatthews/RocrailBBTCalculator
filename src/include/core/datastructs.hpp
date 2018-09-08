@@ -67,6 +67,8 @@ namespace BBTCalculator
             bool shallReduceVelocity{false};
 
             bool isCompletelyStraight{false};
+
+            bool isOnlyMainline{false};
         };
 
         using RouteList = std::vector<Route>;
