@@ -157,6 +157,17 @@ void Core::calculateBBT(const QString& locName)
 
     if (it != locList.end())
     {
+        if (not it->bbt.empty())
+        {
+            int returnCode = mainWindow->askUserIfExistingBBTEntriesShallBeDeleted();
+            if (returnCode == QMessageBox::Cancel) {
+                return;
+            }
+            if (returnCode == QMessageBox::Yes) {
+                it->bbt.clear();
+            }
+        }
+
         BlockList& blockList{workspace.getBlockList()};
         RouteList& routeList{workspace.getRouteList()};
 

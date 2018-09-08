@@ -65,7 +65,8 @@ void MainWindow::setController(MainWindowController* contr)
     connectSignals();
 
     QSettings settings;
-    ui->showMainlineOnly->setChecked(settings.value("showMainLineOnly", false).toBool());
+    ui->showMainlineOnly->setChecked(
+        settings.value("showMainLineOnly", false).toBool());
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
@@ -194,7 +195,16 @@ void MainWindow::setLocNameInBBTBox(const QString& locName)
                          " " + tr("entries") + ")");
 }
 
-auto BBTCalculator::Gui::MainWindow::getUserSelectedCorrectionFactor() const -> double
+auto MainWindow::getUserSelectedCorrectionFactor() const -> double
 {
     return ui->correctionFactor->value();
+}
+
+auto MainWindow::askUserIfExistingBBTEntriesShallBeDeleted() -> int
+{
+    return QMessageBox::warning(
+        this, tr("Existing BBT entries"),
+        tr("There are some BBT entries stored for this locomotive.\nShall they "
+           "be overwritten?"),
+        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
 }

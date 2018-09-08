@@ -52,6 +52,8 @@ namespace BBTCalculator
 
             auto getUserSelectedCorrectionFactor() const -> double;
 
+            auto askUserIfExistingBBTEntriesShallBeDeleted() -> int;
+
         private:
             void setupMenuActions();
 
