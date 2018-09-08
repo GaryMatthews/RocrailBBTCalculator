@@ -9,6 +9,7 @@
 #include "gui/bbtmodel.hpp"
 #include "gui/blockmodel.hpp"
 #include "gui/locmodel.hpp"
+#include "gui/routemodel.hpp"
 
 #include "workspace.hpp"
 
@@ -50,10 +51,12 @@ namespace BBTCalculator
 
             std::unique_ptr<Gui::LocModel> locModel;
             std::unique_ptr<Gui::BlockModel> blockModel;
+            std::unique_ptr<Gui::RouteModel> routeModel;
             std::unique_ptr<Gui::BBTModel> bbtModel;
 
             std::unique_ptr<QSortFilterProxyModel> locSortFilterModel;
             std::unique_ptr<QSortFilterProxyModel> blockSortFilterModel;
+            std::unique_ptr<QSortFilterProxyModel> routeSortFilterModel;
             std::unique_ptr<QSortFilterProxyModel> bbtSortFilterModel;
         };
     } // namespace Core

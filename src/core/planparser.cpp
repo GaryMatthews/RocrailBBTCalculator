@@ -39,6 +39,10 @@ void PlanParser::parse()
     QDomNodeList blocks = root.elementsByTagName("bk");
 
     parseBlocks(blocks);
+
+    QDomNodeList routes = root.elementsByTagName("st");
+
+    parseRoutes(routes);
 }
 
 void PlanParser::parseLocs(const QDomNodeList& locs)
@@ -147,6 +151,66 @@ void PlanParser::parseBlocks(const QDomNodeList& blocks)
     }
 }
 
+void PlanParser::parseRoutes(const QDomNodeList& routes)
+{
+    routeList.reserve(static_cast<unsigned long>(routes.length()));
+
+    for (int i = 0; i < routes.length(); ++i)
+    {
+        const auto currentRoute = routes.at(i);
+        const auto currentRouteAttributes{currentRoute.attributes()};
+
+        const QDomAttr routeIdAttr{
+            currentRouteAttributes.namedItem("id").toAttr()};
+        const QDomAttr routeFromBlockAttr{
+            currentRouteAttributes.namedItem("bka").toAttr()};
+        const QDomAttr routeToBlockAttr{
+            currentRouteAttributes.namedItem("bkb").toAttr()};
+        const QDomAttr routeFromBlockEnterSideAttr{
+            currentRouteAttributes.namedItem("bkaside").toAttr()};
+        const QDomAttr routeToBlockEnterSideAttr{
+            currentRouteAttributes.namedItem("bkbside").toAttr()};
+        const QDomAttr reduceVelocityAttr{
+            currentRouteAttributes.namedItem("reducev").toAttr()};
+
+        const QDomNodeList switches{
+            currentRoute.toElement().elementsByTagName("swcmd")};
+
+        const bool isCompletelyStraight{not isTurnInRoute(switches)};
+
+        Route route{routeIdAttr.value(),
+                    routeFromBlockAttr.value(),
+                    routeToBlockAttr.value(),
+                    routeFromBlockEnterSideAttr.value(),
+                    routeToBlockEnterSideAttr.value(),
+                    convertStringToBool(reduceVelocityAttr.value()),
+                    isCompletelyStraight};
+
+        routeList.emplace_back(route);
+    }
+}
+
+bool PlanParser::isTurnInRoute(const QDomNodeList& switches)
+{
+    if (switches.size() == 0) return false;
+
+    for (int i = 0; i < switches.size(); ++i)
+    {
+        const auto currentSwitch = switches.at(i);
+        const auto currentSwitchAttributes{currentSwitch.attributes()};
+
+        const QDomAttr switchCommand{
+            currentSwitchAttributes.namedItem("cmd").toAttr()};
+
+        if (switchCommand.value() == "turnout")
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 auto PlanParser::getLocList() const -> BBTCalculator::Core::LocList
 {
     return locList;
@@ -155,6 +219,11 @@ auto PlanParser::getLocList() const -> BBTCalculator::Core::LocList
 auto PlanParser::getBlockList() const -> BBTCalculator::Core::BlockList
 {
     return blockList;
+}
+
+auto PlanParser::getRouteList() const -> BBTCalculator::Core::RouteList
+{
+    return routeList;
 }
 
 auto PlanParser::convertStringToBool(const QString& string) -> bool

@@ -22,6 +22,8 @@ namespace BBTCalculator
 
             auto getBlockList() const -> BlockList;
 
+            auto getRouteList() const -> RouteList;
+
         private:
             void parseLocs(const QDomNodeList& locs);
 
@@ -29,11 +31,17 @@ namespace BBTCalculator
 
             void parseBlocks(const QDomNodeList& blocks);
 
+            void parseRoutes(const QDomNodeList& routes);
+
+            bool isTurnInRoute(const QDomNodeList& switches);
+
             auto convertStringToBool(const QString& string) -> bool;
 
             LocList locList;
 
             BlockList blockList;
+
+            RouteList routeList;
 
             QFile file;
         };

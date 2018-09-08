@@ -18,6 +18,7 @@ TARGET_SOURCES(bbtCalculatorGui
     blockmodel.cpp
     bbtmodel.cpp
     locmodel.cpp
+    routemodel.cpp
 
     mainwindow.cpp
     mainwindowcontroller.cpp

@@ -2,6 +2,7 @@
 #include "mainwindow.hpp"
 
 #include <QResizeEvent>
+#include <mainwindow.hpp>
 
 #include <QtCore/QSettings>
 #include <QtWidgets/QFileDialog>
@@ -10,6 +11,7 @@
 #include "bbtmodel.hpp"
 #include "blockmodel.hpp"
 #include "locmodel.hpp"
+#include "routemodel.hpp"
 #include "ui_mainwindow.h"
 
 using BBTCalculator::Gui::MainWindow;
@@ -31,6 +33,11 @@ MainWindow::MainWindow(QWidget* parent)
     ui->blockTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->blockTable->setSortingEnabled(true);
     ui->blockTable->horizontalHeader()->setStretchLastSection(true);
+
+    ui->routesTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->routesTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->routesTable->setSortingEnabled(true);
+    ui->routesTable->horizontalHeader()->setStretchLastSection(true);
 
     ui->bbtTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->bbtTable->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -132,6 +139,15 @@ void MainWindow::setBlockTableModel(QAbstractItemModel* model)
 
     ui->blockTable->resizeColumnsToContents();
     ui->blockTable->sortByColumn(static_cast<int>(BlockViewColumns::NAME),
+                                 Qt::AscendingOrder);
+}
+
+void MainWindow::setRouteTableModel(QAbstractItemModel* model)
+{
+    ui->routesTable->setModel(model);
+
+    ui->routesTable->resizeColumnsToContents();
+    ui->routesTable->sortByColumn(static_cast<int>(RouteViewColumns::NAME),
                                  Qt::AscendingOrder);
 }
 

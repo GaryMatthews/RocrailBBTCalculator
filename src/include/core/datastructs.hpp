@@ -53,5 +53,22 @@ namespace BBTCalculator
         };
 
         using BlockList = std::vector<Block>;
+
+        struct Route
+        {
+            QString id = "";
+
+            QString fromBlock = "";
+            QString toBlock = "";
+
+            QString fromBlockEnterSide = "";
+            QString toBlockEnterSide = "";
+
+            bool shallReduceVelocity{false};
+
+            bool isCompletelyStraight{false};
+        };
+
+        using RouteList = std::vector<Route>;
     } // namespace Core
 } // namespace BBTCalculator

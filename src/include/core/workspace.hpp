@@ -27,6 +27,10 @@ namespace BBTCalculator
 
             auto getBlockList() -> BlockList&;
 
+            void setRouteList(const RouteList& routeList);
+
+            auto getRouteList() -> RouteList&;
+
             auto getImagePath() const -> QString;
 
         private:
@@ -36,6 +40,7 @@ namespace BBTCalculator
 
             LocList locList;
             BlockList blockList;
+            RouteList routeList;
         };
     } // namespace Core
 } // namespace BBTCalculator

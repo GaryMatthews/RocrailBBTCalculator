@@ -2,6 +2,8 @@
 
 #include "workspace.hpp"
 
+#include <workspace.hpp>
+
 using BBTCalculator::Core::Workspace;
 
 void Workspace::setRootPath(const QDir& root)
@@ -34,6 +36,16 @@ void Workspace::setBlockList(const BlockList& lList)
 auto Workspace::getBlockList() -> BlockList&
 {
     return blockList;
+}
+
+void Workspace::setRouteList(const RouteList& rList)
+{
+    routeList = rList;
+}
+
+auto Workspace::getRouteList() -> RouteList&
+{
+    return routeList;
 }
 
 auto Workspace::getImagePath() const -> QString
