@@ -121,3 +121,25 @@ void Core::createBBTModel(const QString& locName)
         mainWindow->setBBTTableModel(bbtSortFilterModel.get());
     }
 }
+
+void Core::filterBlockByMainline(int column)
+{
+    filterBlockAndRouteByMainline(blockSortFilterModel.get(), column);
+}
+
+void Core::filterRouteByMainline(int column)
+{
+    filterBlockAndRouteByMainline(routeSortFilterModel.get(), column);
+}
+
+void Core::removeBlockAndRouteMainlineFilter()
+{
+    blockSortFilterModel->setFilterRegExp("");
+    routeSortFilterModel->setFilterRegExp("");
+}
+
+void Core::filterBlockAndRouteByMainline(QSortFilterProxyModel* model, int column)
+{
+    model->setFilterKeyColumn(column);
+    model->setFilterRegExp("true");
+}

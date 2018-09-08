@@ -103,6 +103,8 @@ void MainWindow::connectSignals()
     connect(ui->locList->selectionModel(),
             &QItemSelectionModel::selectionChanged, controller,
             &MainWindowController::onLocSelectionChanged);
+    connect(ui->showMainlineOnly, &QCheckBox::stateChanged, controller,
+            &MainWindowController::onFilterMainlineStateChanged);
 }
 
 auto MainWindow::letUserSelectWorkspaceDirectory() -> QString
@@ -148,7 +150,7 @@ void MainWindow::setRouteTableModel(QAbstractItemModel* model)
 
     ui->routesTable->resizeColumnsToContents();
     ui->routesTable->sortByColumn(static_cast<int>(RouteViewColumns::NAME),
-                                 Qt::AscendingOrder);
+                                  Qt::AscendingOrder);
 }
 
 void MainWindow::displayLocImage(QPixmap& locImage)

@@ -40,8 +40,16 @@ namespace BBTCalculator
 
             void createBBTModel(const QString& locName);
 
+            void filterBlockByMainline(int column);
+
+            void filterRouteByMainline(int column);
+
+            void removeBlockAndRouteMainlineFilter();
+
         private:
             void setupTranslator();
+
+            void filterBlockAndRouteByMainline(QSortFilterProxyModel* model, int column);
 
             std::shared_ptr<Gui::MainWindow> mainWindow;
 

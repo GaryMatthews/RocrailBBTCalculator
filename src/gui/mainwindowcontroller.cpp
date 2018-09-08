@@ -1,8 +1,6 @@
 
 #include "mainwindowcontroller.hpp"
 
-#include <mainwindowcontroller.hpp>
-
 #include "core/core.hpp"
 
 using BBTCalculator::Core::Core;
@@ -34,4 +32,17 @@ void MainWindowController::onLocSelectionChanged(
                               .toString()};
     core->displayImageForLocName(locName);
     core->createBBTModel(locName);
+}
+
+void MainWindowController::onFilterMainlineStateChanged(int state)
+{
+    if (state == Qt::Checked)
+    {
+        core->filterBlockByMainline(static_cast<int>(BlockViewColumns::MAINLINE));
+        core->filterRouteByMainline(static_cast<int>(RouteViewColumns::MAINLINE));
+    }
+    else
+    {
+        core->removeBlockAndRouteMainlineFilter();
+    }
 }

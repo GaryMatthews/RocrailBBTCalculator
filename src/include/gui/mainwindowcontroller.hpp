@@ -31,6 +31,8 @@ namespace BBTCalculator
             void onLocSelectionChanged(const QItemSelection& selected,
                                        const QItemSelection& deselected);
 
+            void onFilterMainlineStateChanged(int state);
+
         private:
             BBTCalculator::Core::Core* core;
         };
