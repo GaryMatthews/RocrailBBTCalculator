@@ -47,6 +47,8 @@ MainWindow::MainWindow(QWidget* parent)
     ui->locImage->installEventFilter(this);
 
     ui->calculateBBT->setEnabled(false);
+    ui->correctionFactorDescription->setEnabled(false);
+    ui->correctionFactor->setEnabled(false);
 
     QSettings settings;
     this->restoreGeometry(settings.value("mainwindow/geometry").toByteArray());
@@ -181,6 +183,8 @@ void BBTCalculator::Gui::MainWindow::setBBTTableModel(QAbstractItemModel* model)
                                Qt::AscendingOrder);
 
     ui->calculateBBT->setEnabled(true);
+    ui->correctionFactorDescription->setEnabled(true);
+    ui->correctionFactor->setEnabled(true);
 }
 
 void MainWindow::setLocNameInBBTBox(const QString& locName)
@@ -188,4 +192,9 @@ void MainWindow::setLocNameInBBTBox(const QString& locName)
     ui->bbtBox->setTitle("BBT - " + locName + " (" +
                          QString::number(ui->bbtTable->model()->rowCount()) +
                          " " + tr("entries") + ")");
+}
+
+auto BBTCalculator::Gui::MainWindow::getUserSelectedCorrectionFactor() const -> double
+{
+    return ui->correctionFactor->value();
 }

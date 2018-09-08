@@ -14,7 +14,7 @@ namespace BBTCalculator
         public:
             Calculation(Loc* l, const RouteList& rList, const BlockList& bList);
 
-            void calculateNewBBTEntries();
+            void calculateNewBBTEntries(double correctionFactor);
 
         private:
 

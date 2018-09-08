@@ -50,6 +50,8 @@ namespace BBTCalculator
 
             void setLocNameInBBTBox(const QString& locName);
 
+            auto getUserSelectedCorrectionFactor() const -> double;
+
         private:
             void setupMenuActions();
 

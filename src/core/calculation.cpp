@@ -10,7 +10,7 @@ Calculation::Calculation(Loc* l, const RouteList& rList, const BlockList& bList)
 {
 }
 
-void Calculation::calculateNewBBTEntries()
+void Calculation::calculateNewBBTEntries(double correctionFactor)
 {
     for (const auto& route : routes)
     {
@@ -42,6 +42,7 @@ void Calculation::calculateNewBBTEntries()
             {
                 bbt.interval = static_cast<int>(2.0 * blockIt->length /
                                                 speedMMPerSecondScaled / bbt.steps * 1000.0);
+                bbt.interval = static_cast<int>(bbt.interval * correctionFactor);
             }
 
             loc->bbt.emplace_back(bbt);

@@ -161,7 +161,7 @@ void Core::calculateBBT(const QString& locName)
         RouteList& routeList{workspace.getRouteList()};
 
         Calculation calc{&(*it), routeList, blockList};
-        calc.calculateNewBBTEntries();
+        calc.calculateNewBBTEntries(mainWindow->getUserSelectedCorrectionFactor());
 
         createBBTModel(locName);
     }
