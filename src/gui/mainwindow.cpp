@@ -173,3 +173,10 @@ void BBTCalculator::Gui::MainWindow::setBBTTableModel(QAbstractItemModel* model)
     ui->bbtTable->sortByColumn(static_cast<int>(BBTViewColumns::BLOCK),
                                Qt::AscendingOrder);
 }
+
+void MainWindow::setLocNameInBBTBox(const QString& locName)
+{
+    ui->bbtBox->setTitle("BBT - " + locName + " (" +
+                         QString::number(ui->bbtTable->model()->rowCount()) +
+                         " " + tr("entries") + ")");
+}

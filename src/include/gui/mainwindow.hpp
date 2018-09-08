@@ -48,6 +48,8 @@ namespace BBTCalculator
 
             void setBBTTableModel(QAbstractItemModel* model);
 
+            void setLocNameInBBTBox(const QString& locName);
+
         private:
             void setupMenuActions();
 

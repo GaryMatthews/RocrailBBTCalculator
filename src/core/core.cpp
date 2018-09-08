@@ -120,6 +120,8 @@ void Core::createBBTModel(const QString& locName)
         bbtSortFilterModel->setSourceModel(bbtModel.get());
 
         mainWindow->setBBTTableModel(bbtSortFilterModel.get());
+
+        mainWindow->setLocNameInBBTBox(it->name);
     }
 }
 
