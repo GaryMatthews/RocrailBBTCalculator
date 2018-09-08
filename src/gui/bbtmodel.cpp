@@ -82,7 +82,7 @@ QVariant BBTModel::headerData(int section, Qt::Orientation orientation,
         case BBTViewColumns::ROUTE:
             return tr("Route");
         case BBTViewColumns::INTERVAL:
-            return tr("Interval");
+            return tr("Deceleration time");
         case BBTViewColumns::STEPS:
             return tr("Steps");
         case BBTViewColumns::SPEED:
