@@ -4,9 +4,19 @@ image: Visual Studio 2017
 configuration:
   - Release
 
+environment:
+  matrix:
+  - QT5: C:\Qt\5.11.1\msvc2017_64
+
+before_build:
+- set Path=%QT5%\bin;%Path%
+- cmake -H. -Bbuild "-DCMAKE_PREFIX_PATH=%QT5%"
+
 build_script:
-    - cd C:\projects\RocrailBBTCalculator
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make package
+- cmake --build build --config "%CONFIGURATION%"
+
+after_build:
+- cmake --build build --config "%CONFIGURATION%" --target package
+
+artifacts:
+- path: build/rocrailBBTCalculator-*.exe
