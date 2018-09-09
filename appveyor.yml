@@ -1,0 +1,11 @@
+
+version: 1.0.{build}
+
+build_script:
+
+- sh: >-
+    cd C:\projects\RocrailBBTCalculator
+    mkdir build
+    cd build
+    cmake ..
+    make package
