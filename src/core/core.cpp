@@ -17,7 +17,6 @@ using BBTCalculator::Gui::MainWindowController;
 Core::Core::Core()
     : mainWindow{new MainWindow()}
 {
-    letUserSelectWorkspace();
 }
 
 void Core::initializeApplication(MainWindowController& contr)
@@ -39,8 +38,7 @@ void Core::setupTranslator()
 
 void BBTCalculator::Core::Core::letUserSelectWorkspace()
 {
-    QString userSelectedDirectory = QString(
-        "/home/markus/rocrailMeinPlan/"); // mainWindow->letUserSelectWorkspaceDirectory();
+    QString userSelectedDirectory = mainWindow->letUserSelectWorkspaceDirectory();
 
     if (!userSelectedDirectory.isEmpty())
     {
