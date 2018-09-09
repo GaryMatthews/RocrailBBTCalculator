@@ -27,7 +27,7 @@ void MainWindowController::onOpenWorkspaceClicked(bool)
 void MainWindowController::onLocSelectionChanged(
     const QItemSelection& selected, const QItemSelection& deselected)
 {
-    if (not selected.isEmpty())
+    if (!selected.isEmpty())
     {
         const QItemSelectionRange& singleRow{selected.at(0)};
 

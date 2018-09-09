@@ -5,6 +5,10 @@
 #include <workspace.hpp>
 
 using BBTCalculator::Core::Workspace;
+using BBTCalculator::Core::LocList;
+using BBTCalculator::Core::BlockList;
+using BBTCalculator::Core::RouteList;
+
 
 void Workspace::setRootPath(const QDir& root)
 {

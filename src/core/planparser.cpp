@@ -11,12 +11,13 @@
 
 using BBTCalculator::Core::BBTList;
 using BBTCalculator::Core::PlanParser;
+using BBTCalculator::Core::Loc;
 
 PlanParser::PlanParser(std::string f)
     : file{QString::fromStdString(f)}
 {
     file.open(QIODevice::ReadWrite);
-    if (not file.isOpen() or not file.isReadable())
+    if (!file.isOpen() || !file.isReadable())
     {
         // TODO: handle error case
     }
@@ -25,7 +26,7 @@ PlanParser::PlanParser(std::string f)
 void PlanParser::parse()
 {
     QDomDocument document("plan");
-    if (not document.setContent(&file))
+    if (!document.setContent(&file))
     {
         // TODO: report error
         file.close();
@@ -177,7 +178,7 @@ void PlanParser::parseRoutes(const QDomNodeList& routes)
         const QDomNodeList switches{
             currentRoute.toElement().elementsByTagName("swcmd")};
 
-        const bool isCompletelyStraight{not isTurnInRoute(switches)};
+        const bool isCompletelyStraight{!isTurnInRoute(switches)};
 
         QString blockName{routeFromBlockAttr.value()};
 
@@ -252,7 +253,7 @@ auto PlanParser::convertStringToBool(const QString& string) -> bool
 void PlanParser::saveBBTForLocomotive(const Loc& loc)
 {
     QDomDocument document("plan");
-    if (not document.setContent(&file))
+    if (!document.setContent(&file))
     {
         // TODO: report error
         file.close();
@@ -273,7 +274,7 @@ void PlanParser::saveBBTForLocomotive(const Loc& loc)
         if (locNameAttr.value() == loc.name)
         {
             QDomNodeList bbts = currentLoc.toElement().elementsByTagName("bbt");
-            while (not bbts.isEmpty()) {
+            while (!bbts.isEmpty()) {
                 QDomNode node = bbts.at(0);
                 currentLoc.removeChild(node);
             }

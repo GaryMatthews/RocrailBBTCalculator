@@ -2,7 +2,6 @@
 #include "mainwindow.hpp"
 
 #include <QResizeEvent>
-#include <mainwindow.hpp>
 
 #include <QtCore/QSettings>
 #include <QtWidgets/QFileDialog>
@@ -15,6 +14,7 @@
 #include "ui_mainwindow.h"
 
 using BBTCalculator::Gui::MainWindow;
+using BBTCalculator::Gui::MainWindowController;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)

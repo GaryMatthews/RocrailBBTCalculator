@@ -28,7 +28,7 @@ int LocModel::columnCount(const QModelIndex& parent) const
 
 QVariant LocModel::data(const QModelIndex& index, int role) const
 {
-    if (not index.isValid()) // TODO: check index in range
+    if (!index.isValid()) // TODO: check index in range
         return QVariant();
 
     if (role == Qt::DisplayRole)

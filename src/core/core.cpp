@@ -42,7 +42,7 @@ void BBTCalculator::Core::Core::letUserSelectWorkspace()
     QString userSelectedDirectory = QString(
         "/home/markus/rocrailMeinPlan/"); // mainWindow->letUserSelectWorkspaceDirectory();
 
-    if (not userSelectedDirectory.isEmpty())
+    if (!userSelectedDirectory.isEmpty())
     {
         const QDir dir{userSelectedDirectory};
         if (dir.exists())
@@ -157,7 +157,7 @@ void Core::calculateBBT(const QString& locName)
 
     if (it != locList.end())
     {
-        if (not it->bbt.empty())
+        if (!it->bbt.empty())
         {
             int returnCode = mainWindow->askUserIfExistingBBTEntriesShallBeDeleted();
             if (returnCode == QMessageBox::Cancel) {

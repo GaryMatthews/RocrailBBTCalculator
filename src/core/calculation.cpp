@@ -2,6 +2,9 @@
 #include "calculation.hpp"
 
 using BBTCalculator::Core::Calculation;
+using BBTCalculator::Core::Loc;
+using BBTCalculator::Core::BlockList;
+using BBTCalculator::Core::RouteList;
 
 Calculation::Calculation(Loc* l, const RouteList& rList, const BlockList& bList)
     : loc{l}
