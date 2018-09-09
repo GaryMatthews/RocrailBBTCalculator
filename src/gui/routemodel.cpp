@@ -4,6 +4,7 @@
 
 #include <QModelIndex>
 
+#include <QApplication>
 #include <QtGui/QIcon>
 
 using BBTCalculator::Core::RouteList;
@@ -87,15 +88,15 @@ QVariant RouteModel::headerData(int section, Qt::Orientation orientation,
         switch (static_cast<RouteViewColumns>(section))
         {
         case RouteViewColumns::MAINLINE:
-            return tr("Mainline");
+            return QApplication::translate("RouteModel", "Mainline");
         case RouteViewColumns::NAME:
-            return tr("Name");
+            return QApplication::translate("RouteModel", "Name");
         case RouteViewColumns::FROM_BLOCK:
-            return tr("From Block");
+            return QApplication::translate("RouteModel", "From Block");
         case RouteViewColumns::TO_BLOCK:
-            return tr("To Block");
+            return QApplication::translate("RouteModel", "To Block");
         case RouteViewColumns::STRAIGHT:
-            return tr("Straight");
+            return QApplication::translate("RouteModel", "Straight");
         default:
             return QVariant();
         }

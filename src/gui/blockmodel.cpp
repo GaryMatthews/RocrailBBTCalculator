@@ -2,7 +2,9 @@
 
 #include "blockmodel.hpp"
 
+#include <QApplication>
 #include <QModelIndex>
+
 #include <QtGui/QIcon>
 
 using BBTCalculator::Core::BlockList;
@@ -38,7 +40,8 @@ QVariant BlockModel::data(const QModelIndex& index, int role) const
         case BlockViewColumns::LEN:
             return blockList.at(static_cast<unsigned long>(index.row())).length;
         case BlockViewColumns::MAINLINE:
-            return blockList.at(static_cast<unsigned long>(index.row())).isMainLine;
+            return blockList.at(static_cast<unsigned long>(index.row()))
+                .isMainLine;
         default:
             return QVariant();
         }
@@ -66,11 +69,11 @@ QVariant BlockModel::headerData(int section, Qt::Orientation orientation,
         switch (static_cast<BlockViewColumns>(section))
         {
         case BlockViewColumns::MAINLINE:
-            return tr("Mainline");
+            return QApplication::translate("BlockModel", "Mainline");
         case BlockViewColumns::NAME:
-            return tr("Name");
+            return QApplication::translate("BlockModel", "Name");
         case BlockViewColumns::LEN:
-            return tr("Length");
+            return QApplication::translate("BlockModel", "Length");
         default:
             return QVariant();
         }

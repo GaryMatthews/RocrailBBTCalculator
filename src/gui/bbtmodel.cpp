@@ -2,6 +2,7 @@
 
 #include "bbtmodel.hpp"
 
+#include <QApplication>
 #include <QModelIndex>
 
 #include <QtGui/QIcon>
@@ -76,21 +77,21 @@ QVariant BBTModel::headerData(int section, Qt::Orientation orientation,
         switch (static_cast<BBTViewColumns>(section))
         {
         case BBTViewColumns::BLOCK:
-            return tr("Block");
+            return QApplication::translate("BBTModel", "Block");
         case BBTViewColumns::FROM_BLOCK:
-            return tr("From Block");
+            return QApplication::translate("BBTModel", "From Block");
         case BBTViewColumns::ROUTE:
-            return tr("Route");
+            return QApplication::translate("BBTModel", "Route");
         case BBTViewColumns::INTERVAL:
-            return tr("Deceleration time");
+            return QApplication::translate("BBTModel", "Deceleration time");
         case BBTViewColumns::STEPS:
-            return tr("Steps");
+            return QApplication::translate("BBTModel", "Steps");
         case BBTViewColumns::SPEED:
-            return tr("Speed");
+            return QApplication::translate("BBTModel", "Speed");
         case BBTViewColumns::COUNT:
-            return tr("Counter");
+            return QApplication::translate("BBTModel", "Counter");
         case BBTViewColumns::FIXED:
-            return tr("Fixed");
+            return QApplication::translate("BBTModel", "Fixed");
         default:
             return QVariant();
         }

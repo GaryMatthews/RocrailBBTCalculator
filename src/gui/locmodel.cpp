@@ -2,7 +2,9 @@
 
 #include "locmodel.hpp"
 
+#include <QApplication>
 #include <QModelIndex>
+
 #include <QtGui/QIcon>
 
 using BBTCalculator::Core::LocList;
@@ -76,17 +78,17 @@ QVariant LocModel::headerData(int section, Qt::Orientation orientation,
         switch (static_cast<LocViewColumns>(section))
         {
         case LocViewColumns::BBT:
-            return tr("BBT");
+            return QApplication::translate("LocModel", "BBT");
         case LocViewColumns::NAME:
-            return tr("Name");
+            return QApplication::translate("LocModel", "Name");
         case LocViewColumns::BBT_STEPS:
-            return tr("BBT Steps");
+            return QApplication::translate("LocModel", "BBT Steps");
         case LocViewColumns::V_MIN:
-            return tr("V min");
+            return QApplication::translate("LocModel", "V min");
         case LocViewColumns::V_MID:
-            return tr("V mid");
+            return QApplication::translate("LocModel", "V mid");
         case LocViewColumns::V_CRU:
-            return tr("V cru");
+            return QApplication::translate("LocModel", "V cru");
         default:
             return QVariant();
         }

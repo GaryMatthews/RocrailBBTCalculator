@@ -122,15 +122,18 @@ void MainWindow::connectSignals()
 auto MainWindow::letUserSelectWorkspaceDirectory() -> QString
 {
     return QFileDialog::getExistingDirectory(
-        this, tr("Select Rocrail workspace"), QDir::homePath(),
-        QFileDialog::ShowDirsOnly);
+        this, QApplication::translate("MainWindow", "Select Rocrail workspace"),
+        QDir::homePath(), QFileDialog::ShowDirsOnly);
 }
 
 void MainWindow::notifyUserSelectedDirectoryDoesNotExist()
 {
-    QMessageBox::critical(this, tr("Workspace directory not found"),
-                          tr("The selected workspace directory does not"
-                             "exist."));
+    QMessageBox::critical(
+        this,
+        QApplication::translate("MainWindow", "Workspace directory not found"),
+        QApplication::translate("MainWindow",
+                                "The selected workspace directory does not"
+                                "exist."));
 }
 
 void MainWindow::showRootPath(const QString& path)
@@ -190,9 +193,10 @@ void BBTCalculator::Gui::MainWindow::setBBTTableModel(QAbstractItemModel* model)
 
 void MainWindow::setLocNameInBBTBox(const QString& locName)
 {
-    ui->bbtBox->setTitle("BBT - " + locName + " (" +
-                         QString::number(ui->bbtTable->model()->rowCount()) +
-                         " " + tr("entries") + ")");
+    ui->bbtBox->setTitle(
+        "BBT - " + locName + " (" +
+        QString::number(ui->bbtTable->model()->rowCount()) + " " +
+        QApplication::translate("MainWindow", "entries") + ")");
 }
 
 auto MainWindow::getUserSelectedCorrectionFactor() const -> double
@@ -203,8 +207,10 @@ auto MainWindow::getUserSelectedCorrectionFactor() const -> double
 auto MainWindow::askUserIfExistingBBTEntriesShallBeDeleted() -> int
 {
     return QMessageBox::warning(
-        this, tr("Existing BBT entries"),
-        tr("There are some BBT entries stored for this locomotive.\nShall they "
-           "be overwritten?"),
+        this, QApplication::translate("MainWindow", "Existing BBT entries"),
+        QApplication::translate("MainWindow",
+                                "There are some BBT entries stored for this "
+                                "locomotive.\nShall they "
+                                "be overwritten?"),
         QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
 }
