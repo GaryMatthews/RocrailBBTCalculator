@@ -27,13 +27,63 @@ INSTALL(TARGETS rocrailBBTCalculator
   RUNTIME DESTINATION bin
 )
 
+IF (WIN32)
+  INCLUDE(${CMAKE_SOURCE_DIR}/cmake/windeployqt.cmake)
+
+  WINDEPLOYQT(rocrailBBTCalculator)
+
+  INSTALL(
+    FILES
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/Qt5Core.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/Qt5Gui.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/Qt5Svg.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/Qt5Widgets.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/Qt5Xml.dll
+    DESTINATION bin
+  )
+  INSTALL(
+    FILES
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/iconengines/qsvgicon.dll
+    DESTINATION bin/iconengines
+  )
+  INSTALL(
+    FILES
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qgif.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qicns.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qico.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qjpeg.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qsvg.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qtga.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qtiff.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qwbmp.dll
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/imageformats/qwebp.dll
+    DESTINATION bin/imageformats
+  )
+  INSTALL(
+    FILES
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/platforms/qwindows.dll
+    DESTINATION bin/platforms
+  )
+  INSTALL(
+    FILES
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/styles/qwindowsvistastyle.dll
+    DESTINATION bin/styles
+  )
+  INSTALL(
+    FILES
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/translations/qt_de.qm
+      $<TARGET_FILE_DIR:rocrailBBTCalculator>/translations/qt_en.qm
+    DESTINATION bin/translations
+  )
+ENDIF (WIN32)
+
 SET(CPACK_PACKAGE_NAME "rocrailBBTCalculator")
 SET(CPACK_PACKAGE_INSTALL_DIRECTORY "rocrailBBTCalculator")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Calculates BBT values for RocRail Locomotives")
 
 SET(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 SET(CPACK_NSIS_DISPLAY_NAME "Rocrail BBT Calculator")
-SET(CPACK_NSIS_PACKAGE_NAME "Rocrail BBT Calculator Setup")
+SET(CPACK_NSIS_PACKAGE_NAME "Rocrail BBT Calculator")
 
 SET(CPACK_GENERATOR NSIS)
 
