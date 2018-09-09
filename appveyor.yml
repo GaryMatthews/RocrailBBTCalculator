@@ -1,11 +1,12 @@
 
-version: 1.0.{build}
+image: Visual Studio 2017
+
+configuration:
+  - Release
 
 build_script:
-
-- sh: >-
-    cd C:\projects\RocrailBBTCalculator
-    mkdir build
-    cd build
-    cmake ..
-    make package
+    - cd C:\projects\RocrailBBTCalculator
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make package
