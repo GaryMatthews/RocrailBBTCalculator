@@ -1,0 +1,10 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons">
+    <file alias="pass">${CMAKE_CURRENT_SOURCE_DIR}/icons/48px-Dialog-accept.png</file>
+    <file alias="fail">${CMAKE_CURRENT_SOURCE_DIR}/icons/48px-Dialog-error-round.png</file>
+</qresource>
+<qresource prefix="/translations">
+    <file alias="rocrailBBT_de.qm">${CMAKE_CURRENT_BINARY_DIR}/rocrailBBT_de.qm</file>
+    <file alias="rocrailBBT_en.qm">${CMAKE_CURRENT_BINARY_DIR}/rocrailBBT_en.qm</file>
+</qresource>
+</RCC>

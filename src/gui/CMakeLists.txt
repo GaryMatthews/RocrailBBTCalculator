@@ -13,6 +13,8 @@ QT5_ADD_TRANSLATION(QM
 
 ADD_LIBRARY(bbtCalculatorGui STATIC)
 
+CONFIGURE_FILE(application.qrc.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/application.qrc)
+
 TARGET_SOURCES(bbtCalculatorGui
   PRIVATE
     blockmodel.cpp
@@ -26,7 +28,7 @@ TARGET_SOURCES(bbtCalculatorGui
     ${CMAKE_SOURCE_DIR}/src/include/gui/mainwindow.hpp
     ${CMAKE_SOURCE_DIR}/src/include/gui/mainwindowcontroller.hpp
 
-    application.qrc
+    ${CMAKE_CURRENT_BINARY_DIR}/application.qrc
 
     ${QM}
 )
