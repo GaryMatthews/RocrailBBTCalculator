@@ -10,8 +10,11 @@ environment:
     QT5: C:\Qt\5.11.1\msvc2017_64
 
 before_build:
+- rm -rf build
 - set Path=%QT5%\bin;%Path%
 - cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" "-DCMAKE_PREFIX_PATH=%QT5%"
+- CMAKE_PROJECT_VERSION=`cat build/CMakeCache.txt | grep CMAKE_PROJECT_VERSION:STATIC | cut -d'=' -f 2`
+- export CMAKE_PROJECT_VERSION
 
 build_script:
 - cmake --build build --config Release
@@ -20,8 +23,8 @@ after_build:
 - cmake --build build --config Release --target package
 
 deploy:
-  release: RocRailBBTCalculator-v$(appveyor_build_version)
-  description: 'Release description'
+  release: RocRailBBTCalculator-v$(CMAKE_PROJECT_VERSION)
+  description: 'Initial release'
   provider: GitHub
   auth_token:
     secure: i6EnQVg7Lv4pMFPuXqtCNeTTxE6Vk/azuJpCzEg3tSAko7KMGwaX4KzJRViMivF8
