@@ -110,9 +110,6 @@ void MainWindow::connectSignals()
 {
     connect(ui->actionOpenWorkspace, &QAction::triggered, controller,
             &MainWindowController::onOpenWorkspaceClicked);
-    connect(ui->locList->selectionModel(),
-            &QItemSelectionModel::selectionChanged, controller,
-            &MainWindowController::onLocSelectionChanged);
     connect(ui->showMainlineOnly, &QCheckBox::stateChanged, controller,
             &MainWindowController::onFilterMainlineStateChanged);
     connect(ui->calculateBBT, &QPushButton::clicked, controller,
@@ -148,6 +145,10 @@ void MainWindow::setLocTableModel(QAbstractItemModel* model)
     ui->locList->resizeColumnsToContents();
     ui->locList->sortByColumn(static_cast<int>(LocViewColumns::NAME),
                               Qt::AscendingOrder);
+    connect(ui->locList->selectionModel(),
+            &QItemSelectionModel::selectionChanged, controller,
+            &MainWindowController::onLocSelectionChanged);
+
 }
 
 void MainWindow::setBlockTableModel(QAbstractItemModel* model)
