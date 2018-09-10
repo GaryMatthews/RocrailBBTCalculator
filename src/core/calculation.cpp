@@ -28,7 +28,7 @@ void Calculation::calculateNewBBTEntries(double correctionFactor)
 
             bbt.speed = route.isCompletelyStraight ? loc->v_cru : loc->v_mid;
 
-            bbt.steps = 10;
+            bbt.steps = loc->bbtSteps;
 
             const double speedMmPerSecond{bbt.speed / 3.6 * 1000};
             const double speedMMPerSecondScaled{speedMmPerSecond /
