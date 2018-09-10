@@ -173,7 +173,7 @@ void PlanParser::parseRoutes(const QDomNodeList& routes)
         const QDomAttr routeToBlockEnterSideAttr{
             currentRouteAttributes.namedItem("bkbside").toAttr()};
         const QDomAttr reduceVelocityAttr{
-            currentRouteAttributes.namedItem("reducev").toAttr()};
+            currentRouteAttributes.namedItem("reduceV").toAttr()};
 
         const QDomNodeList switches{
             currentRoute.toElement().elementsByTagName("swcmd")};
@@ -201,7 +201,9 @@ void PlanParser::parseRoutes(const QDomNodeList& routes)
                     routeToBlockAttr.value(),
                     routeFromBlockEnterSideAttr.value(),
                     routeToBlockEnterSideAttr.value(),
-                    convertStringToBool(reduceVelocityAttr.value()),
+                    convertStringToBool(reduceVelocityAttr.value().isEmpty()
+                                            ? "true"
+                                            : reduceVelocityAttr.value()),
                     isCompletelyStraight,
                     isOnlyMainline};
 

@@ -17,6 +17,7 @@ namespace BBTCalculator
             FROM_BLOCK,
             TO_BLOCK,
             STRAIGHT,
+            REDUCEV,
             NUMBER_OF_COLUMNS
         };
 

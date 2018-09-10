@@ -26,7 +26,10 @@ void Calculation::calculateNewBBTEntries(double correctionFactor)
             bbt.block = route.toBlock;
             bbt.count = 0;
 
-            bbt.speed = route.isCompletelyStraight ? loc->v_cru : loc->v_mid;
+            bbt.speed =
+                ! route.shallReduceVelocity
+                    ? loc->v_cru
+                    : route.isCompletelyStraight ? loc->v_cru : loc->v_mid;
 
             bbt.steps = loc->bbtSteps;
 

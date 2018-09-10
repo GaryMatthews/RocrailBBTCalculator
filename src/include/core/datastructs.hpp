@@ -64,7 +64,7 @@ namespace BBTCalculator
             QString fromBlockEnterSide = "";
             QString toBlockEnterSide = "";
 
-            bool shallReduceVelocity{false};
+            bool shallReduceVelocity{true};
 
             bool isCompletelyStraight{false};
 

@@ -49,6 +49,9 @@ QVariant RouteModel::data(const QModelIndex& index, int role) const
         case RouteViewColumns::STRAIGHT:
             return routeList.at(static_cast<unsigned long>(index.row()))
                 .isCompletelyStraight;
+        case RouteViewColumns::REDUCEV:
+            return routeList.at(static_cast<unsigned long>(index.row()))
+                .shallReduceVelocity;
         default:
             return QVariant();
         }
@@ -72,6 +75,15 @@ QVariant RouteModel::data(const QModelIndex& index, int role) const
 
             return isMainLine ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
                               : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+        }
+        if (index.column() == static_cast<int>(RouteViewColumns::REDUCEV))
+        {
+            const bool reduceV{
+                routeList.at(static_cast<unsigned long>(index.row()))
+                    .shallReduceVelocity};
+
+            return reduceV ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
+                           : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
         }
     }
     return QVariant();
@@ -97,6 +109,8 @@ QVariant RouteModel::headerData(int section, Qt::Orientation orientation,
             return QApplication::translate("RouteModel", "To Block");
         case RouteViewColumns::STRAIGHT:
             return QApplication::translate("RouteModel", "Straight");
+        case RouteViewColumns::REDUCEV:
+            return QApplication::translate("RouteModel", "Reduce velocity");
         default:
             return QVariant();
         }
