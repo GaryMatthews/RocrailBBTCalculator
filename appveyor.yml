@@ -13,8 +13,7 @@ before_build:
 - rm -rf build
 - set Path=%QT5%\bin;%Path%
 - cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" "-DCMAKE_PREFIX_PATH=%QT5%"
-- CMAKE_PROJECT_VERSION=`cat build/CMakeCache.txt | grep CMAKE_PROJECT_VERSION:STATIC | cut -d'=' -f 2`
-- export CMAKE_PROJECT_VERSION
+- set CMAKE_PROJECT_VERSION=`cat build/CMakeCache.txt | grep CMAKE_PROJECT_VERSION:STATIC | cut -d'=' -f 2`
 
 build_script:
 - cmake --build build --config Release
