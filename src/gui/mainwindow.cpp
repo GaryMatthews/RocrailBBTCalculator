@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->calculateBBT->setEnabled(false);
     ui->correctionFactorDescription->setEnabled(false);
     ui->correctionFactor->setEnabled(false);
+    ui->showMainlineOnly->setEnabled(false);
 
     QSettings settings;
     this->restoreGeometry(settings.value("mainwindow/geometry").toByteArray());
@@ -148,7 +149,6 @@ void MainWindow::setLocTableModel(QAbstractItemModel* model)
     connect(ui->locList->selectionModel(),
             &QItemSelectionModel::selectionChanged, controller,
             &MainWindowController::onLocSelectionChanged);
-
 }
 
 void MainWindow::setBlockTableModel(QAbstractItemModel* model)
@@ -158,6 +158,8 @@ void MainWindow::setBlockTableModel(QAbstractItemModel* model)
     ui->blockTable->resizeColumnsToContents();
     ui->blockTable->sortByColumn(static_cast<int>(BlockViewColumns::NAME),
                                  Qt::AscendingOrder);
+    ui->showMainlineOnly->setEnabled(true);
+    controller->onFilterMainlineStateChanged(ui->showMainlineOnly->checkState());
 }
 
 void MainWindow::setRouteTableModel(QAbstractItemModel* model)

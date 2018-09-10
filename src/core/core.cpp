@@ -141,8 +141,11 @@ void Core::removeBlockAndRouteMainlineFilter()
 
 void Core::filterBlockAndRouteByMainline(QSortFilterProxyModel* model, int column)
 {
-    model->setFilterKeyColumn(column);
-    model->setFilterRegExp("true");
+    if (model != nullptr)
+    {
+        model->setFilterKeyColumn(column);
+        model->setFilterRegExp("true");
+    }
 }
 
 void Core::calculateBBT(const QString& locName)
