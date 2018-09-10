@@ -30,7 +30,7 @@ void Calculation::calculateNewBBTEntries(double correctionFactor)
 
             bbt.steps = loc->bbtSteps;
 
-            const double speedMmPerSecond{bbt.speed / 3.6 * 1000};
+            const double speedMmPerSecond{(bbt.speed - loc->v_min) / 3.6 * 1000};
             const double speedMMPerSecondScaled{speedMmPerSecond /
                                                 H0ScalingFactor};
 
