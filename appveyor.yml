@@ -19,5 +19,16 @@ build_script:
 after_build:
 - cmake --build build --config Release --target package
 
-artifacts:
-- path: build/rocrailBBTCalculator-*.exe
+deploy:
+  release: RocRailBBTCalculator-v$(appveyor_build_version)
+  description: 'Release description'
+  provider: GitHub
+  auth_token:
+    secure: i6EnQVg7Lv4pMFPuXqtCNeTTxE6Vk/azuJpCzEg3tSAko7KMGwaX4KzJRViMivF8
+  artifact: build/rocrailBBTCalculator-*.exe
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    appveyor_repo_tag: true        # deploy on tag push only
+
