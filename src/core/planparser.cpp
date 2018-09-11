@@ -182,16 +182,16 @@ void PlanParser::parseRoutes(const QDomNodeList& routes)
 
         const bool isCompletelyStraight{!isTurnInRoute(switches)};
 
-        QString blockName{routeFromBlockAttr.value()};
+        QString blockSearchName{routeFromBlockAttr.value()};
 
-        const auto search = [blockName](const Block& item) {
-            return item.name == blockName && item.isMainLine;
+        const auto search = [&blockSearchName](const Block& item) {
+            return item.name == blockSearchName && item.isMainLine;
         };
 
         auto fromBlockIt =
             std::find_if(blockList.begin(), blockList.end(), search);
 
-        blockName = routeToBlockAttr.value();
+        blockSearchName = routeToBlockAttr.value();
 
         auto toBlockIt =
             std::find_if(blockList.begin(), blockList.end(), search);
