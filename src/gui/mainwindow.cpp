@@ -28,21 +28,25 @@ MainWindow::MainWindow(QWidget* parent)
     ui->locList->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->locList->setSortingEnabled(true);
     ui->locList->horizontalHeader()->setStretchLastSection(true);
+    ui->locList->horizontalHeader()->setSectionsMovable(true);
 
     ui->blockTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->blockTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->blockTable->setSortingEnabled(true);
     ui->blockTable->horizontalHeader()->setStretchLastSection(true);
+    ui->blockTable->horizontalHeader()->setSectionsMovable(true);
 
     ui->routesTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->routesTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->routesTable->setSortingEnabled(true);
     ui->routesTable->horizontalHeader()->setStretchLastSection(true);
+    ui->routesTable->horizontalHeader()->setSectionsMovable(true);
 
     ui->bbtTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->bbtTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->bbtTable->setSortingEnabled(true);
     ui->bbtTable->horizontalHeader()->setStretchLastSection(true);
+    ui->bbtTable->horizontalHeader()->setSectionsMovable(true);
 
     ui->locImage->installEventFilter(this);
 
