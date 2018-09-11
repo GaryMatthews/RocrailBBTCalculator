@@ -263,6 +263,11 @@ void MainWindow::setLocNameInBBTBox(const QString& locName)
         QApplication::translate("MainWindow", "entries") + ")");
 }
 
+void MainWindow::setCorrectionFactor(double correctionFactor)
+{
+    ui->correctionFactor->setValue(correctionFactor);
+}
+
 auto MainWindow::getUserSelectedCorrectionFactor() const -> double
 {
     return ui->correctionFactor->value();

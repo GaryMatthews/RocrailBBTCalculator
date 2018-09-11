@@ -50,6 +50,8 @@ namespace BBTCalculator
 
             void setLocNameInBBTBox(const QString& locName);
 
+            void setCorrectionFactor(double correctionFactor);
+
             auto getUserSelectedCorrectionFactor() const -> double;
 
             auto askUserIfExistingBBTEntriesShallBeDeleted() -> int;

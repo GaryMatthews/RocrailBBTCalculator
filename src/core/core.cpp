@@ -120,6 +120,10 @@ void Core::createBBTModel(const QString& locName)
         mainWindow->setBBTTableModel(bbtSortFilterModel.get());
 
         mainWindow->setLocNameInBBTBox(it->name);
+
+        QSettings settings;
+        mainWindow->setCorrectionFactor(
+            settings.value(QString("locomotive/") + it->name, 1.0).toDouble());
     }
 }
 
@@ -173,7 +177,12 @@ void Core::calculateBBT(const QString& locName)
         RouteList& routeList{workspace.getRouteList()};
 
         Calculation calc{&(*it), routeList, blockList};
-        calc.calculateNewBBTEntries(mainWindow->getUserSelectedCorrectionFactor());
+        calc.calculateNewBBTEntries(
+            mainWindow->getUserSelectedCorrectionFactor());
+
+        QSettings settings;
+        settings.setValue(QString("locomotive/") + it->name,
+                          mainWindow->getUserSelectedCorrectionFactor());
 
         createBBTModel(locName);
 
