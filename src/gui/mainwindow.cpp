@@ -57,6 +57,15 @@ MainWindow::MainWindow(QWidget* parent)
 
     QSettings settings;
     this->restoreGeometry(settings.value("mainwindow/geometry").toByteArray());
+
+    ui->splitter->restoreState(settings.value("splitter/state").toByteArray());
+    ui->splitter_2->restoreState(
+        settings.value("splitter2/state").toByteArray());
+
+    ui->splitter->restoreGeometry(
+        settings.value("splitter/geometry").toByteArray());
+    ui->splitter_2->restoreGeometry(
+        settings.value("splitter2/geometry").toByteArray());
 }
 
 MainWindow::~MainWindow()
@@ -108,6 +117,31 @@ void MainWindow::closeEvent(QCloseEvent* event)
     settings.setValue("mainwindow/geometry", this->saveGeometry());
 
     settings.setValue("showMainLineOnly", ui->showMainlineOnly->isChecked());
+
+    settings.setValue("locView/columnSequence",
+                      ui->locList->horizontalHeader()->saveState());
+    settings.setValue("blockView/columnSequence",
+                      ui->blockTable->horizontalHeader()->saveState());
+    settings.setValue("routesView/columnSequence",
+                      ui->routesTable->horizontalHeader()->saveState());
+    settings.setValue("bbtView/columnSequence",
+                      ui->bbtTable->horizontalHeader()->saveState());
+
+    settings.setValue("locView/geometry",
+                      ui->locList->horizontalHeader()->saveGeometry());
+    settings.setValue("blockView/geometry",
+                      ui->blockTable->horizontalHeader()->saveGeometry());
+    settings.setValue("routesView/geometry",
+                      ui->routesTable->horizontalHeader()->saveGeometry());
+    settings.setValue("bbtView/geometry",
+                      ui->bbtTable->horizontalHeader()->saveGeometry());
+
+    settings.setValue("splitter/state", ui->splitter->saveState());
+    settings.setValue("splitter2/state", ui->splitter_2->saveState());
+
+    settings.setValue("splitter/geometry", ui->splitter->saveGeometry());
+    settings.setValue("splitter2/geometry", ui->splitter_2->saveGeometry());
+
     QWidget::closeEvent(event);
 }
 
@@ -153,6 +187,11 @@ void MainWindow::setLocTableModel(QAbstractItemModel* model)
     connect(ui->locList->selectionModel(),
             &QItemSelectionModel::selectionChanged, controller,
             &MainWindowController::onLocSelectionChanged);
+    QSettings settings;
+    ui->locList->horizontalHeader()->restoreState(
+        settings.value("locView/columnSequence").toByteArray());
+    ui->locList->horizontalHeader()->restoreGeometry(
+        settings.value("locView/geometry").toByteArray());
 }
 
 void MainWindow::setBlockTableModel(QAbstractItemModel* model)
@@ -163,7 +202,14 @@ void MainWindow::setBlockTableModel(QAbstractItemModel* model)
     ui->blockTable->sortByColumn(static_cast<int>(BlockViewColumns::NAME),
                                  Qt::AscendingOrder);
     ui->showMainlineOnly->setEnabled(true);
-    controller->onFilterMainlineStateChanged(ui->showMainlineOnly->checkState());
+    controller->onFilterMainlineStateChanged(
+        ui->showMainlineOnly->checkState());
+
+    QSettings settings;
+    ui->blockTable->horizontalHeader()->restoreState(
+        settings.value("blockView/columnSequence").toByteArray());
+    ui->blockTable->horizontalHeader()->restoreGeometry(
+        settings.value("blockView/geometry").toByteArray());
 }
 
 void MainWindow::setRouteTableModel(QAbstractItemModel* model)
@@ -173,6 +219,11 @@ void MainWindow::setRouteTableModel(QAbstractItemModel* model)
     ui->routesTable->resizeColumnsToContents();
     ui->routesTable->sortByColumn(static_cast<int>(RouteViewColumns::NAME),
                                   Qt::AscendingOrder);
+    QSettings settings;
+    ui->routesTable->horizontalHeader()->restoreState(
+        settings.value("routesView/columnSequence").toByteArray());
+    ui->routesTable->horizontalHeader()->restoreGeometry(
+        settings.value("routesView/geometry").toByteArray());
 }
 
 void MainWindow::displayLocImage(QPixmap& locImage)
@@ -196,6 +247,12 @@ void BBTCalculator::Gui::MainWindow::setBBTTableModel(QAbstractItemModel* model)
     ui->calculateBBT->setEnabled(true);
     ui->correctionFactorDescription->setEnabled(true);
     ui->correctionFactor->setEnabled(true);
+
+    QSettings settings;
+    ui->bbtTable->horizontalHeader()->restoreState(
+        settings.value("bbtView/columnSequence").toByteArray());
+    ui->bbtTable->horizontalHeader()->restoreGeometry(
+        settings.value("bbtView/geometry").toByteArray());
 }
 
 void MainWindow::setLocNameInBBTBox(const QString& locName)
