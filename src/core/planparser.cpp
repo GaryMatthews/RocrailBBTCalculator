@@ -9,6 +9,8 @@
 
 #include "datastructs.hpp"
 
+static const int indentation = 2;
+
 using BBTCalculator::Core::BBTList;
 using BBTCalculator::Core::PlanParser;
 using BBTCalculator::Core::Loc;
@@ -302,6 +304,6 @@ void PlanParser::saveBBTForLocomotive(const Loc& loc)
     file.resize(0);
     QTextStream stream( &file );
 
-    stream << document.toString(2);
+    document.save(stream, indentation);
     file.close();
 }
