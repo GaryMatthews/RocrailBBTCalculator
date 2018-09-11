@@ -12,8 +12,8 @@ namespace BBTCalculator
     {
         enum class BBTViewColumns
         {
-            BLOCK = 0,
-            FROM_BLOCK,
+            FROM_BLOCK = 0,
+            BLOCK,
             ROUTE,
             INTERVAL,
             STEPS,
