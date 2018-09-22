@@ -185,6 +185,7 @@ void MainWindow::setLocTableModel(QAbstractItemModel* model)
         settings.value("locView/columnSequence").toByteArray());
     ui->locList->horizontalHeader()->restoreGeometry(
         settings.value("locView/geometry").toByteArray());
+    setupTable(ui->locList);
 }
 
 void MainWindow::setBlockTableModel(QAbstractItemModel* model)
@@ -203,6 +204,7 @@ void MainWindow::setBlockTableModel(QAbstractItemModel* model)
         settings.value("blockView/columnSequence").toByteArray());
     ui->blockTable->horizontalHeader()->restoreGeometry(
         settings.value("blockView/geometry").toByteArray());
+    setupTable(ui->blockTable);
 }
 
 void MainWindow::setRouteTableModel(QAbstractItemModel* model)
@@ -217,6 +219,7 @@ void MainWindow::setRouteTableModel(QAbstractItemModel* model)
         settings.value("routesView/columnSequence").toByteArray());
     ui->routesTable->horizontalHeader()->restoreGeometry(
         settings.value("routesView/geometry").toByteArray());
+    setupTable(ui->routesTable);
 }
 
 void MainWindow::displayLocImage(QPixmap& locImage)
@@ -246,6 +249,7 @@ void BBTCalculator::Gui::MainWindow::setBBTTableModel(QAbstractItemModel* model)
         settings.value("bbtView/columnSequence").toByteArray());
     ui->bbtTable->horizontalHeader()->restoreGeometry(
         settings.value("bbtView/geometry").toByteArray());
+    setupTable(ui->bbtTable);
 }
 
 void MainWindow::setLocNameInBBTBox(const QString& locName)
