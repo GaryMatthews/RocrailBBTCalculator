@@ -116,7 +116,7 @@ BBTList PlanParser::parseBBT(const QDomNode& node)
         const QDomAttr countAttribute{
             currentBBTAttributes.namedItem("count").toAttr()};
         const QDomAttr fixedAttribute{
-            currentBBTAttributes.namedItem("isFixed").toAttr()};
+            currentBBTAttributes.namedItem("fixed").toAttr()};
 
         BBT bbt{blockAttribute.value(),
                 fromBlockAttribute.value(),
