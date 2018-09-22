@@ -89,7 +89,7 @@ void MainWindow::setupTable(QTableView* table) const
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
     table->setSelectionMode(QAbstractItemView::SingleSelection);
     table->setSortingEnabled(true);
-    table->horizontalHeader()->setStretchLastSection(true);
+    table->horizontalHeader()->setStretchLastSection(false);
     table->horizontalHeader()->setSectionsMovable(true);
 }
 
