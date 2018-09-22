@@ -27,7 +27,7 @@ void Calculation::calculateNewBBTEntries(double correctionFactor)
                return bbt.route == routeId;
             });
             if (bbtIt != presentBBTs.end()) {
-                if (not bbtIt->isFixed) {
+                if (!bbtIt->isFixed) {
                     bbtIt->count = 0;
                     *bbtIt = doIntervalComputation(correctionFactor, route, *bbtIt);
                 }
