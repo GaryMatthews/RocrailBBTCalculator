@@ -181,6 +181,7 @@ void Core::calculateBBT(const QString& locName)
 
     if (it != locList.end())
     {
+        bool shallOverwriteExistingValues{false};
         if (!it->bbt.empty())
         {
             int returnCode = mainWindow->askUserIfExistingBBTEntriesShallBeDeleted();
@@ -188,14 +189,14 @@ void Core::calculateBBT(const QString& locName)
                 return;
             }
             if (returnCode == QMessageBox::Yes) {
-                it->bbt.clear();
+                shallOverwriteExistingValues = true;
             }
         }
 
         BlockList& blockList{workspace.getBlockList()};
         RouteList& routeList{workspace.getRouteList()};
 
-        Calculation calc{&(*it), routeList, blockList};
+        Calculation calc{&(*it), routeList, blockList, shallOverwriteExistingValues};
         calc.calculateNewBBTEntries(
             mainWindow->getUserSelectedCorrectionFactor());
 
