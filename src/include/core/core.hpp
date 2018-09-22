@@ -53,20 +53,24 @@ namespace BBTCalculator
 
             void filterBlockAndRouteByMainline(QSortFilterProxyModel* model, int column);
 
+            void loadLastOpenWorkspace();
+
+            void loadWorkspace(const QString& userSelectedDirectory);
+
             std::shared_ptr<Gui::MainWindow> mainWindow;
 
             QTranslator translator;
-
             Workspace workspace;
-
             std::unique_ptr<Gui::LocModel> locModel;
             std::unique_ptr<Gui::BlockModel> blockModel;
+
             std::unique_ptr<Gui::RouteModel> routeModel;
             std::unique_ptr<Gui::BBTModel> bbtModel;
-
             std::unique_ptr<QSortFilterProxyModel> locSortFilterModel;
             std::unique_ptr<QSortFilterProxyModel> blockSortFilterModel;
+
             std::unique_ptr<QSortFilterProxyModel> routeSortFilterModel;
+
             std::unique_ptr<QSortFilterProxyModel> bbtSortFilterModel;
         };
     } // namespace Core

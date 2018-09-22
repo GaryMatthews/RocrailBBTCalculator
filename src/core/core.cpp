@@ -24,6 +24,8 @@ void Core::initializeApplication(MainWindowController& contr)
     mainWindow->setController(&contr);
     setupTranslator();
     mainWindow->show();
+
+    loadLastOpenWorkspace();
 }
 
 void Core::setupTranslator()
@@ -36,10 +38,27 @@ void Core::setupTranslator()
     }
 }
 
+void BBTCalculator::Core::Core::loadLastOpenWorkspace()
+{
+    QSettings settings;
+
+    QString workspaceDirectory = settings.value("workspaceDirectory", "").toString();
+
+    loadWorkspace(workspaceDirectory);
+}
+
 void BBTCalculator::Core::Core::letUserSelectWorkspace()
 {
     QString userSelectedDirectory = mainWindow->letUserSelectWorkspaceDirectory();
 
+    loadWorkspace(userSelectedDirectory);
+
+    QSettings settings;
+    settings.setValue("workspaceDirectory", userSelectedDirectory);
+}
+
+void Core::loadWorkspace(const QString& userSelectedDirectory)
+{
     if (!userSelectedDirectory.isEmpty())
     {
         const QDir dir{userSelectedDirectory};
