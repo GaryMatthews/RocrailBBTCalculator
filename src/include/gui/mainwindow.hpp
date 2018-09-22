@@ -5,6 +5,7 @@
 
 #include <QtCore/QAbstractTableModel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QTableView>
 
 #include "mainwindowcontroller.hpp"
 
@@ -57,6 +58,8 @@ namespace BBTCalculator
             auto askUserIfExistingBBTEntriesShallBeDeleted() -> int;
 
         private:
+            void setupTable(QTableView* table) const;
+
             void setupMenuActions();
 
             void connectSignals();

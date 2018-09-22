@@ -24,29 +24,13 @@ MainWindow::MainWindow(QWidget* parent)
 
     setupMenuActions();
 
-    ui->locList->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->locList->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->locList->setSortingEnabled(true);
-    ui->locList->horizontalHeader()->setStretchLastSection(true);
-    ui->locList->horizontalHeader()->setSectionsMovable(true);
+    setupTable(ui->locList);
 
-    ui->blockTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->blockTable->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->blockTable->setSortingEnabled(true);
-    ui->blockTable->horizontalHeader()->setStretchLastSection(true);
-    ui->blockTable->horizontalHeader()->setSectionsMovable(true);
+    setupTable(ui->blockTable);
 
-    ui->routesTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->routesTable->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->routesTable->setSortingEnabled(true);
-    ui->routesTable->horizontalHeader()->setStretchLastSection(true);
-    ui->routesTable->horizontalHeader()->setSectionsMovable(true);
+    setupTable(ui->routesTable);
 
-    ui->bbtTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->bbtTable->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->bbtTable->setSortingEnabled(true);
-    ui->bbtTable->horizontalHeader()->setStretchLastSection(true);
-    ui->bbtTable->horizontalHeader()->setSectionsMovable(true);
+    setupTable(ui->bbtTable);
 
     ui->locImage->installEventFilter(this);
 
@@ -98,6 +82,15 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         return false;
     }
     return QObject::eventFilter(watched, event);
+}
+
+void MainWindow::setupTable(QTableView* table) const
+{
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table->setSelectionMode(QAbstractItemView::SingleSelection);
+    table->setSortingEnabled(true);
+    table->horizontalHeader()->setStretchLastSection(true);
+    table->horizontalHeader()->setSectionsMovable(true);
 }
 
 void MainWindow::setupMenuActions()
