@@ -224,6 +224,11 @@ void MainWindow::setRouteTableModel(QAbstractItemModel* model)
 
 void MainWindow::displayLocImage(QPixmap locImage)
 {
+    if (locImage.isNull())
+    {
+        ui->locImage->clear();
+        return;
+    }
     originalLocImage = locImage;
 
     ui->locImage->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);

@@ -1,6 +1,4 @@
-//
-// Created by markus on 06.10.18.
-//
+
 
 #include "imagesortfilterproxymodel.hpp"
 
