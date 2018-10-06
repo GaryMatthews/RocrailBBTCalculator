@@ -43,17 +43,26 @@ QVariant RouteModel::data(const QModelIndex& index, int role) const
         case RouteViewColumns::TO_BLOCK:
             return routeList.at(static_cast<unsigned long>(index.row()))
                 .toBlock;
-        case RouteViewColumns::MAINLINE:
-            return routeList.at(static_cast<unsigned long>(index.row()))
-                .isOnlyMainline;
-        case RouteViewColumns::STRAIGHT:
-            return routeList.at(static_cast<unsigned long>(index.row()))
-                .isCompletelyStraight;
-        case RouteViewColumns::REDUCEV:
-            return routeList.at(static_cast<unsigned long>(index.row()))
-                .shallReduceVelocity;
         default:
             return QVariant();
+        }
+    }
+    if (role == Qt::ToolTipRole)
+    {
+        if (index.column() == static_cast<int>(RouteViewColumns::STRAIGHT))
+        {
+            return routeList.at(static_cast<unsigned long>(index.row()))
+                .isCompletelyStraight;
+        }
+        if (index.column() == static_cast<int>(RouteViewColumns::MAINLINE))
+        {
+            return routeList.at(static_cast<unsigned long>(index.row()))
+                .isOnlyMainline;
+        }
+        if (index.column() == static_cast<int>(RouteViewColumns::REDUCEV))
+        {
+            return routeList.at(static_cast<unsigned long>(index.row()))
+                .shallReduceVelocity;
         }
     }
     if (role == Qt::DecorationRole)

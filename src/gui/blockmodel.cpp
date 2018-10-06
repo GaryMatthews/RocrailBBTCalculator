@@ -39,12 +39,15 @@ QVariant BlockModel::data(const QModelIndex& index, int role) const
             return blockList.at(static_cast<unsigned long>(index.row())).name;
         case BlockViewColumns::LEN:
             return blockList.at(static_cast<unsigned long>(index.row())).length;
-        case BlockViewColumns::MAINLINE:
-            return blockList.at(static_cast<unsigned long>(index.row()))
-                .isMainLine;
         default:
             return QVariant();
         }
+    }
+    if (role == Qt::ToolTipRole &&
+        index.column() == static_cast<int>(BlockViewColumns::MAINLINE))
+    {
+        return blockList.at(static_cast<unsigned long>(index.row()))
+            .isMainLine;
     }
     if (role == Qt::DecorationRole &&
         index.column() == static_cast<int>(BlockViewColumns::MAINLINE))

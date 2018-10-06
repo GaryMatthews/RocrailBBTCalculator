@@ -54,6 +54,10 @@ QVariant BBTModel::data(const QModelIndex& index, int role) const
             return QVariant();
         }
     }
+    if (role == Qt::ToolTipRole &&
+        index.column() == static_cast<int>(BBTViewColumns::FIXED)) {
+        return  bbtList.at(static_cast<unsigned long>(index.row())).isFixed;
+    }
     if (role == Qt::DecorationRole &&
         index.column() == static_cast<int>(BBTViewColumns::FIXED))
     {

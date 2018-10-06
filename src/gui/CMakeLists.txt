@@ -22,6 +22,8 @@ TARGET_SOURCES(bbtCalculatorGui
     locmodel.cpp
     routemodel.cpp
 
+    imagesortfilterproxymodel.cpp
+
     mainwindow.cpp
     mainwindowcontroller.cpp
 

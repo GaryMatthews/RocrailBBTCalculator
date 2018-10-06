@@ -4,6 +4,7 @@
 
 #include <QtWidgets/QtWidgets>
 
+#include "gui/imagesortfilterproxymodel.hpp"
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
 
@@ -42,14 +43,16 @@ void BBTCalculator::Core::Core::loadLastOpenWorkspace()
 {
     QSettings settings;
 
-    QString workspaceDirectory = settings.value("workspaceDirectory", "").toString();
+    QString workspaceDirectory =
+        settings.value("workspaceDirectory", "").toString();
 
     loadWorkspace(workspaceDirectory);
 }
 
 void BBTCalculator::Core::Core::letUserSelectWorkspace()
 {
-    QString userSelectedDirectory = mainWindow->letUserSelectWorkspaceDirectory();
+    QString userSelectedDirectory =
+        mainWindow->letUserSelectWorkspaceDirectory();
 
     loadWorkspace(userSelectedDirectory);
 
@@ -79,9 +82,12 @@ void Core::loadWorkspace(const QString& userSelectedDirectory)
             routeModel =
                 std::make_unique<Gui::RouteModel>(workspace.getRouteList());
 
-            locSortFilterModel = std::make_unique<QSortFilterProxyModel>();
-            blockSortFilterModel = std::make_unique<QSortFilterProxyModel>();
-            routeSortFilterModel = std::make_unique<QSortFilterProxyModel>();
+            locSortFilterModel =
+                std::make_unique<Gui::ImageSortFilterProxyModel>();
+            blockSortFilterModel =
+                std::make_unique<Gui::ImageSortFilterProxyModel>();
+            routeSortFilterModel =
+                std::make_unique<Gui::ImageSortFilterProxyModel>();
 
             locSortFilterModel->setSourceModel(locModel.get());
             blockSortFilterModel->setSourceModel(blockModel.get());
@@ -133,7 +139,7 @@ void Core::createBBTModel(const QString& locName)
     {
         bbtModel = std::make_unique<Gui::BBTModel>(it->bbt);
 
-        bbtSortFilterModel = std::make_unique<QSortFilterProxyModel>();
+        bbtSortFilterModel = std::make_unique<Gui::ImageSortFilterProxyModel>();
         bbtSortFilterModel->setSourceModel(bbtModel.get());
 
         mainWindow->setBBTTableModel(bbtSortFilterModel.get());
@@ -162,7 +168,8 @@ void Core::removeBlockAndRouteMainlineFilter()
     routeSortFilterModel->setFilterRegExp("");
 }
 
-void Core::filterBlockAndRouteByMainline(QSortFilterProxyModel* model, int column)
+void Core::filterBlockAndRouteByMainline(QSortFilterProxyModel* model,
+                                         int column)
 {
     if (model != nullptr)
     {
@@ -184,11 +191,14 @@ void Core::calculateBBT(const QString& locName)
         bool shallOverwriteExistingValues{false};
         if (!it->bbt.empty())
         {
-            int returnCode = mainWindow->askUserIfExistingBBTEntriesShallBeDeleted();
-            if (returnCode == QMessageBox::Cancel) {
+            int returnCode =
+                mainWindow->askUserIfExistingBBTEntriesShallBeDeleted();
+            if (returnCode == QMessageBox::Cancel)
+            {
                 return;
             }
-            if (returnCode == QMessageBox::Yes) {
+            if (returnCode == QMessageBox::Yes)
+            {
                 shallOverwriteExistingValues = true;
             }
         }
@@ -196,7 +206,8 @@ void Core::calculateBBT(const QString& locName)
         BlockList& blockList{workspace.getBlockList()};
         RouteList& routeList{workspace.getRouteList()};
 
-        Calculation calc{&(*it), routeList, blockList, shallOverwriteExistingValues};
+        Calculation calc{&(*it), routeList, blockList,
+                         shallOverwriteExistingValues};
         calc.calculateNewBBTEntries(
             mainWindow->getUserSelectedCorrectionFactor());
 

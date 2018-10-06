@@ -45,24 +45,23 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
             return locList.at(static_cast<unsigned long>(index.row())).v_mid;
         case LocViewColumns::V_CRU:
             return locList.at(static_cast<unsigned long>(index.row())).v_cru;
-        case LocViewColumns::BBT:
-            return locList.at(static_cast<unsigned long>(index.row())).useBBT;
         default:
             return QVariant();
         }
     }
-    if (role == Qt::DecorationRole)
+    if (role == Qt::ToolTipRole &&
+        index.column() == static_cast<int>(LocViewColumns::BBT))
+    {
+        return locList.at(static_cast<unsigned long>(index.row())).useBBT;
+    }
+    if (role == Qt::DecorationRole &&
+        index.column() == static_cast<int>(LocViewColumns::BBT))
     {
         const bool useBBT{
             locList.at(static_cast<unsigned long>(index.row())).useBBT};
-        switch (static_cast<LocViewColumns>(index.column()))
-        {
-        case LocViewColumns::BBT:
-            return useBBT ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                          : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
-        default:
-            return QVariant();
-        }
+
+        return useBBT ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
+                      : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
     }
     return QVariant();
 }
