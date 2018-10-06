@@ -4,4 +4,5 @@ PROJECT(rocrailBBTCalculator
   VERSION 0.2.0
   )
 
+ADD_SUBDIRECTORY(3rdparty)
 ADD_SUBDIRECTORY(src)
