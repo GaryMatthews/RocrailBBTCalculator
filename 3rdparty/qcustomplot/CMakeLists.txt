@@ -13,11 +13,3 @@ TARGET_LINK_LIBRARIES(qcustomplot
     Qt5::PrintSupport
     Qt5::Widgets
 )
-
-ADD_EXECUTABLE(IconGenerator
-  main.cpp)
-
-TARGET_LINK_LIBRARIES(IconGenerator
-  PRIVATE
-    qcustomplot
-)
