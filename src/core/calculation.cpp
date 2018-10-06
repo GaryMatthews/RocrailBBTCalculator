@@ -2,9 +2,11 @@
 #include <iostream>
 #include "calculation.hpp"
 
+static constexpr short MINIMUM_INTERVAL_TIME_IN_MS{1000};
+
+using BBTCalculator::Core::BlockList;
 using BBTCalculator::Core::Calculation;
 using BBTCalculator::Core::Loc;
-using BBTCalculator::Core::BlockList;
 using BBTCalculator::Core::RouteList;
 
 Calculation::Calculation(Loc* l, const RouteList& rList, const BlockList& bList, bool shallOverwriteExistingValues)
@@ -83,10 +85,20 @@ BBTCalculator::Core::BBT& Calculation::doIntervalComputation(
 
     if (blockIt != blocks.end())
     {
+        const double totalBrakeTimeInMillisecons{2.0 * blockIt->length /
+                                                 speedMMPerSecondScaled *
+                                                 1000.0 * correctionFactor};
         bbt.interval =
-            static_cast<int>(2.0 * blockIt->length / speedMMPerSecondScaled /
-                             bbt.steps * 1000.0);
-        bbt.interval = static_cast<int>(bbt.interval * correctionFactor);
+            static_cast<int>(totalBrakeTimeInMillisecons / bbt.steps);
+
+        if (bbt.interval < MINIMUM_INTERVAL_TIME_IN_MS)
+        {
+            bbt.steps = static_cast<int>(totalBrakeTimeInMillisecons /
+                                         MINIMUM_INTERVAL_TIME_IN_MS);
+
+            bbt.interval =
+                static_cast<int>(totalBrakeTimeInMillisecons / bbt.steps);
+        }
     }
     return bbt;
 }
