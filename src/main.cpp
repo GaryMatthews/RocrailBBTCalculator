@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 
     Q_INIT_RESOURCE(application);
 
+    QApplication::setWindowIcon(QIcon(":/icons/appicon"));
     Core core{};
 
     MainWindowController controller{};

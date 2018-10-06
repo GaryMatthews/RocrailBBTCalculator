@@ -2,6 +2,7 @@
 <qresource prefix="/icons">
     <file alias="pass">${CMAKE_CURRENT_SOURCE_DIR}/icons/48px-Dialog-accept.png</file>
     <file alias="fail">${CMAKE_CURRENT_SOURCE_DIR}/icons/48px-Dialog-error-round.png</file>
+    <file alias="appicon">${CMAKE_CURRENT_SOURCE_DIR}/icons/bbtCalculator.png</file>
 </qresource>
 <qresource prefix="/translations">
     <file alias="rocrailBBT_de.qm">${CMAKE_CURRENT_BINARY_DIR}/rocrailBBT_de.qm</file>
