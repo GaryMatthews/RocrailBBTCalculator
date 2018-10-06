@@ -1,5 +1,4 @@
 
-#include <iostream>
 #include "calculation.hpp"
 
 static constexpr short MINIMUM_INTERVAL_TIME_IN_MS{1000};
@@ -9,7 +8,8 @@ using BBTCalculator::Core::Calculation;
 using BBTCalculator::Core::Loc;
 using BBTCalculator::Core::RouteList;
 
-Calculation::Calculation(Loc* l, const RouteList& rList, const BlockList& bList, bool shallOverwriteExistingValues)
+Calculation::Calculation(Loc* l, const RouteList& rList, const BlockList& bList,
+                         bool shallOverwriteExistingValues)
     : loc{l}
     , routes{rList}
     , blocks{bList}
@@ -25,26 +25,58 @@ void Calculation::calculateNewBBTEntries(double correctionFactor)
             BBTList& presentBBTs = loc->bbt;
 
             const QString routeId{route.id};
-            auto bbtIt = std::find_if(presentBBTs.begin(), presentBBTs.end(), [routeId](BBT& bbt){
-               return bbt.route == routeId;
-            });
-            if (bbtIt != presentBBTs.end()) {
-                if (!bbtIt->isFixed) {
-                    bbtIt->count = 0;
-                    *bbtIt = doIntervalComputation(correctionFactor, route, *bbtIt);
-                }
-            } else {
-                createNewBBTEntry(correctionFactor, route);
+            auto bbtIt = std::find_if(
+                presentBBTs.begin(), presentBBTs.end(),
+                [routeId](BBT& bbt) { return bbt.route == routeId; });
+            if (bbtIt != presentBBTs.end())
+            {
+                const QString blockName{bbtIt->block};
+                const auto search = [blockName](const Block& item) {
+                    return item.name == blockName;
+                };
 
+                auto blockIt = find_if(blocks.begin(), blocks.end(), search);
+
+                if (blockIt != blocks.end() && blockIt->length < 1)
+                {
+                    presentBBTs.erase(bbtIt);
+                } else
+                {
+                    if (!bbtIt->isFixed)
+                    {
+                        bbtIt->count = 0;
+                        *bbtIt =
+                            doIntervalComputation(correctionFactor, route,
+                                                  *bbtIt);
+                    }
+                }
             }
-        } else {
+            else
+            {
+                createNewBBTEntry(correctionFactor, route);
+            }
+        }
+        else
+        {
             createNewBBTEntry(correctionFactor, route);
         }
     }
 }
 
-void Calculation::createNewBBTEntry(double correctionFactor, const BBTCalculator::Core::Route& route) const
+void Calculation::createNewBBTEntry(
+    double correctionFactor, const BBTCalculator::Core::Route& route) const
 {
+    const QString blockName{route.toBlock};
+    const auto search = [blockName](const Block& item) {
+        return item.name == blockName;
+    };
+
+    auto blockIt = find_if(blocks.begin(), blocks.end(), search);
+
+    if (blockIt != blocks.end() && blockIt->length < 1) {
+        return;
+    }
+
     BBT bbt;
 
     bbt.route = route.id;
