@@ -31,6 +31,10 @@ QVariant BBTModel::data(const QModelIndex& index, int role) const
     if (!index.isValid()) // TODO: check index in range
         return QVariant();
 
+    if (role == Qt::TextAlignmentRole) {
+        return Qt::AlignCenter;
+    }
+
     if (role == Qt::DisplayRole)
     {
         switch (static_cast<BBTViewColumns>(index.column()))

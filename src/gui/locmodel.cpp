@@ -31,6 +31,10 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
     if (!index.isValid()) // TODO: check index in range
         return QVariant();
 
+    if (role == Qt::TextAlignmentRole)
+    {
+        return Qt::AlignCenter;
+    }
     if (role == Qt::DisplayRole)
     {
         switch (static_cast<LocViewColumns>(index.column()))
