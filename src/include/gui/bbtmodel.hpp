@@ -3,6 +3,7 @@
 #pragma once
 
 #include <QtCore/QAbstractTableModel>
+#include <QIcon>
 
 #include "core/datastructs.hpp"
 
@@ -39,6 +40,9 @@ namespace BBTCalculator
 
         private:
             Core::BBTList bbtList;
+
+            QIcon failIcon;
+            QIcon passIcon;
         };
     } // namespace Gui
 } // namespace BBTCalculator

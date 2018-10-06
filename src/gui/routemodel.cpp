@@ -13,6 +13,8 @@ using BBTCalculator::Gui::RouteModel;
 RouteModel::RouteModel(RouteList& lList, QObject* parent)
     : QAbstractTableModel(parent)
     , routeList{lList}
+    , failIcon{QIcon::fromTheme("fail", QIcon(":/icons/fail"))}
+    , passIcon{QIcon::fromTheme("pass", QIcon(":/icons/pass"))}
 {
 }
 
@@ -76,8 +78,8 @@ QVariant RouteModel::data(const QModelIndex& index, int role) const
                 routeList.at(static_cast<unsigned long>(index.row()))
                     .isCompletelyStraight};
 
-            return isStraight ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                              : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+            return isStraight ? passIcon
+                              : failIcon;
         }
         if (index.column() == static_cast<int>(RouteViewColumns::MAINLINE))
         {
@@ -85,8 +87,8 @@ QVariant RouteModel::data(const QModelIndex& index, int role) const
                 routeList.at(static_cast<unsigned long>(index.row()))
                     .isOnlyMainline};
 
-            return isMainLine ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                              : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+            return isMainLine ? passIcon
+                              : failIcon;
         }
         if (index.column() == static_cast<int>(RouteViewColumns::REDUCEV))
         {
@@ -94,8 +96,8 @@ QVariant RouteModel::data(const QModelIndex& index, int role) const
                 routeList.at(static_cast<unsigned long>(index.row()))
                     .shallReduceVelocity};
 
-            return reduceV ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                           : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+            return reduceV ? passIcon
+                           : failIcon;
         }
     }
     return QVariant();

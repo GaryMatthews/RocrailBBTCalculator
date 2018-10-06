@@ -13,6 +13,8 @@ using BBTCalculator::Gui::LocModel;
 LocModel::LocModel(LocList& lList, QObject* parent)
     : QAbstractTableModel(parent)
     , locList{lList}
+    , failIcon{QIcon::fromTheme("fail", QIcon(":/icons/fail"))}
+    , passIcon{QIcon::fromTheme("pass", QIcon(":/icons/pass"))}
 {
 }
 
@@ -64,8 +66,8 @@ QVariant LocModel::data(const QModelIndex& index, int role) const
         const bool useBBT{
             locList.at(static_cast<unsigned long>(index.row())).useBBT};
 
-        return useBBT ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                      : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+        return useBBT ? passIcon
+                      : failIcon;
     }
     return QVariant();
 }

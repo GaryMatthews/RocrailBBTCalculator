@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <QIcon>
 #include <QtCore/QAbstractTableModel>
 
 #include "core/datastructs.hpp"
@@ -38,6 +39,9 @@ namespace BBTCalculator
 
         private:
             Core::RouteList& routeList;
+
+            QIcon failIcon;
+            QIcon passIcon;
         };
     } // namespace Gui
 } // namespace BBTCalculator

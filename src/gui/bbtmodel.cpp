@@ -13,6 +13,8 @@ using BBTCalculator::Gui::BBTModel;
 BBTModel::BBTModel(BBTList lList, QObject* parent)
     : QAbstractTableModel(parent)
     , bbtList{lList}
+    , failIcon{QIcon::fromTheme("fail", QIcon(":/icons/fail"))}
+    , passIcon{QIcon::fromTheme("pass", QIcon(":/icons/pass"))}
 {
 }
 
@@ -68,8 +70,7 @@ QVariant BBTModel::data(const QModelIndex& index, int role) const
         const bool isFixed{
             bbtList.at(static_cast<unsigned long>(index.row())).isFixed};
 
-        return isFixed ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                       : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+        return isFixed ? passIcon : failIcon;
     }
     return QVariant();
 }

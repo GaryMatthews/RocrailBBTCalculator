@@ -13,6 +13,8 @@ using BBTCalculator::Gui::BlockModel;
 BlockModel::BlockModel(BlockList& lList, QObject* parent)
     : QAbstractTableModel(parent)
     , blockList{lList}
+    , failIcon{QIcon::fromTheme("fail", QIcon(":/icons/fail"))}
+    , passIcon{QIcon::fromTheme("pass", QIcon(":/icons/pass"))}
 {
 }
 
@@ -58,8 +60,8 @@ QVariant BlockModel::data(const QModelIndex& index, int role) const
         const bool isMainLine{
             blockList.at(static_cast<unsigned long>(index.row())).isMainLine};
 
-        return isMainLine ? QIcon::fromTheme("pass", QIcon(":/icons/pass"))
-                          : QIcon::fromTheme("fail", QIcon(":/icons/fail"));
+        return isMainLine ? passIcon
+                          : failIcon;
     }
     return QVariant();
 }
