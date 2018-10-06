@@ -116,14 +116,7 @@ void Core::displayImageForLocName(const QString& locName)
 
     if (it != locList.end())
     {
-        QFileInfo fileInfo(workspace.getImagePath() + it->imageName);
-
-        if (fileInfo.exists() && fileInfo.isFile())
-        {
-            QPixmap locImage{fileInfo.absoluteFilePath()};
-
-            mainWindow->displayLocImage(locImage);
-        }
+       mainWindow->displayLocImage(it->locImage);
     }
 }
 

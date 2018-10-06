@@ -222,7 +222,7 @@ void MainWindow::setRouteTableModel(QAbstractItemModel* model)
     setupTable(ui->routesTable);
 }
 
-void MainWindow::displayLocImage(QPixmap& locImage)
+void MainWindow::displayLocImage(QPixmap locImage)
 {
     originalLocImage = locImage;
 

@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <QPixmap>
 #include <QString>
 #include <vector>
 
@@ -38,6 +39,7 @@ namespace BBTCalculator
             int v_cru{0};
 
             BBTList bbt;
+            QPixmap locImage;
         };
 
         using LocList = std::vector<Loc>;

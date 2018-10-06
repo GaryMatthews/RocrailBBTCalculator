@@ -45,7 +45,7 @@ namespace BBTCalculator
 
             void setRouteTableModel(QAbstractItemModel* model);
 
-            void displayLocImage(QPixmap& locImage);
+            void displayLocImage(QPixmap locImage);
 
             void setBBTTableModel(QAbstractItemModel* model);
 

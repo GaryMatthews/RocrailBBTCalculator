@@ -25,6 +25,16 @@ auto Workspace::getPlanFilePath() const -> const std::string&
 void Workspace::setLocList(const LocList& lList)
 {
     locList = lList;
+
+    for (auto& loc : locList)
+    {
+        QFileInfo fileInfo{getImagePath() + loc.imageName};
+
+        if (fileInfo.exists() && fileInfo.isFile())
+        {
+            loc.locImage = QPixmap{fileInfo.absoluteFilePath()};
+        }
+    }
 }
 
 auto Workspace::getLocList() -> LocList&
