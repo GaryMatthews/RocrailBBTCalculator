@@ -106,6 +106,9 @@ void Core::loadWorkspace(const QString& userSelectedDirectory)
 
 void Core::displayImageForLocName(const QString& locName)
 {
+    QElapsedTimer timer;
+    timer.start();
+
     const LocList& locList = workspace.getLocList();
 
     const auto search = [locName](const Loc& item) {
@@ -118,10 +121,15 @@ void Core::displayImageForLocName(const QString& locName)
     {
        mainWindow->displayLocImage(it->locImage);
     }
+    qDebug() << "Display loc image took" << timer.elapsed() << "milliseconds";
+
 }
 
 void Core::createBBTModel(const QString& locName)
 {
+    QElapsedTimer timer;
+    timer.start();
+
     const LocList& locList = workspace.getLocList();
 
     const auto search = [locName](Loc item) { return item.name == locName; };
@@ -143,6 +151,9 @@ void Core::createBBTModel(const QString& locName)
         mainWindow->setCorrectionFactor(
             settings.value(QString("locomotive/") + it->name, 1.0).toDouble());
     }
+
+    qDebug() << "The slow operation took" << timer.elapsed() << "milliseconds";
+
 }
 
 void Core::filterBlockByMainline(int column)
