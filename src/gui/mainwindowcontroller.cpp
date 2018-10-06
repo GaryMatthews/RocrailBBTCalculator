@@ -4,7 +4,6 @@
 #include <mainwindowcontroller.hpp>
 
 #include "core/core.hpp"
-#include <QtWidgets/QtWidgets>
 
 using BBTCalculator::Core::Core;
 using BBTCalculator::Gui::MainWindowController;
@@ -28,9 +27,6 @@ void MainWindowController::onOpenWorkspaceClicked(bool)
 void MainWindowController::onLocSelectionChanged(
     const QItemSelection& selected, const QItemSelection& deselected)
 {
-    QElapsedTimer timer;
-    timer.start();
-
     if (!selected.isEmpty())
     {
         const QItemSelectionRange& singleRow{selected.at(0)};
@@ -43,8 +39,6 @@ void MainWindowController::onLocSelectionChanged(
         core->displayImageForLocName(locName);
         core->createBBTModel(locName);
     }
-    qDebug() << "Loc selection change took" << timer.elapsed() << "milliseconds";
-
 }
 
 void MainWindowController::onFilterMainlineStateChanged(int state)
